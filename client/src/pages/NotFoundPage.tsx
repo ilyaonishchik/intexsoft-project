@@ -38,7 +38,7 @@ const useStyles = createStyles(theme => ({
   },
 }));
 
-export default function NotFound() {
+export default function NotFoundPage() {
   const { classes } = useStyles();
   return (
     <Container className={classes.root}>

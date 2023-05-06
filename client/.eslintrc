@@ -37,7 +37,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/require-await": "off",
     "no-console": [
-      "error",
+      "warn",
       {
         "allow": [
           "warn",
@@ -62,6 +62,8 @@
       }
     ],
     "react/state-in-constructor": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

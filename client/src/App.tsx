@@ -1,19 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
-import Home from './components/home/Home';
-import NotFound from './components/NotFound';
-import Auth from './components/auth/Auth';
-import Catalog from './components/catalog/Catalog';
+import { AuthPage, CatalogPage, HomePage, NotFoundPage } from './pages';
+import { useAuth } from './lib/auth/useAuth';
 
 function App() {
+  const { me } = useAuth();
+
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route path='/' element={<Home />} />
-        <Route path='catalog' element={<Catalog />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='catalog' element={<CatalogPage />} />
       </Route>
-      <Route path='auth' element={<Auth />} />
-      <Route path='*' element={<NotFound />} />
+      {!me && <Route path='auth' element={<AuthPage />} />}
+      <Route path='*' element={<NotFoundPage />} />
     </Routes>
   );
 }

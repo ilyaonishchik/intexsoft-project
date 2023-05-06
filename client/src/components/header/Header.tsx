@@ -1,6 +1,6 @@
 import { Container, Group } from '@mantine/core';
 import Search from './Search';
-import Nav from './nav/Nav';
+import Nav from './Nav';
 import Logo from './Logo';
 import Menu from './menu/Menu';
 import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
