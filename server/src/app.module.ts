@@ -4,10 +4,23 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.MAIL_HOST,
+        secure: false,
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
+        },
+      },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
@@ -17,7 +30,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    AuthModule,
+    AuthModule.forRoot(),
+    UsersModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
