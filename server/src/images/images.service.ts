@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Image } from './models/image.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateImageDto } from './models/create-image.dto';
 
 @Injectable()
@@ -11,5 +11,13 @@ export class ImagesService {
   create(dto: CreateImageDto): Promise<Image> {
     const image = this.imagesRepository.create(dto);
     return this.imagesRepository.save(image);
+  }
+
+  findAll(): Promise<Image[]> {
+    return this.imagesRepository.find();
+  }
+
+  delete(id: number): Promise<DeleteResult> {
+    return this.imagesRepository.delete({ id });
   }
 }

@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { ImagesModule } from './images/images.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ImagesModule } from './images/images.module';
     UsersModule,
     RolesModule,
     ImagesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
