@@ -2,7 +2,7 @@ import { Container, Group } from '@mantine/core';
 import Search from './Search';
 import Nav from './Nav';
 import Logo from './Logo';
-import Menu from './menu/Menu';
+import Catalog from './catalog/Catalog';
 import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
 
 export default function Header() {
@@ -12,12 +12,12 @@ export default function Header() {
   return (
     <header>
       <Container size='xl'>
-        <Group position='apart' py='xs'>
-          {smallerThanXS && <Menu />}
+        <Group position='apart' py='md'>
+          {smallerThanXS && <Catalog />}
           <Logo />
           {largerThanXS && (
             <Group>
-              <Menu />
+              <Catalog />
               <Search />
             </Group>
           )}

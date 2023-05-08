@@ -3,7 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
 
-export default function Menu() {
+export default function Catalog() {
   const smallerThanMD = useCustomMediaQuery('smaller', 'md');
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -15,7 +15,7 @@ export default function Menu() {
         </ActionIcon>
       ) : (
         <Button leftIcon={opened ? <IconX /> : <IconMenu2 />} onClick={open}>
-          Menu
+          Catalog
         </Button>
       )}
       <Modal opened={opened} onClose={close} title='Menu'>
