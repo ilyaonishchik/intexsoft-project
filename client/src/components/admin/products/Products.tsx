@@ -1,5 +1,14 @@
-import React from 'react';
+import { Button } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import CreateProductModal from './createProductModal/CreateProductModal';
 
 export default function Products() {
-  return <div>Products</div>;
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <div>
+      <Button onClick={open}>Create product</Button>
+      <CreateProductModal opened={opened} onClose={close} />
+    </div>
+  );
 }

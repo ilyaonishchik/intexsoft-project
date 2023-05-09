@@ -6,7 +6,6 @@ import { AdminLayout } from './layouts';
 
 function App() {
   const { me } = useAuth();
-  console.log(me);
   const isAdmin = !!me?.roles.find(role => role.name === 'admin');
 
   return (
@@ -14,13 +13,13 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path='/' element={<HomePage />} />
         <Route path='catalog' element={<CatalogPage />} />
+        {isAdmin && (
+          <Route path='admin' element={<AdminLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path='products' element={<ProductsPage />} />
+          </Route>
+        )}
       </Route>
-      {isAdmin && (
-        <Route path='admin' element={<AdminLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path='products' element={<ProductsPage />} />
-        </Route>
-      )}
       {!me && <Route path='auth' element={<AuthPage />} />}
       <Route path='*' element={<NotFoundPage />} />
     </Routes>
