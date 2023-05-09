@@ -15,6 +15,10 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
+  findAll(): Promise<User[]> {
+    return this.usersRepository.find({ relations: { roles: true } });
+  }
+
   findOneByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email }, relations: { roles: true } });
   }
@@ -26,5 +30,12 @@ export class UsersService {
   async verify(id: number): Promise<User> {
     await this.usersRepository.update({ id }, { verified: true });
     return this.usersRepository.findOneBy({ id });
+  }
+
+  async makeAdmin(id: number): Promise<User> {
+    const user = await this.usersRepository.findOne({ where: { id }, relations: { roles: true } });
+    const adminRole = await this.rolesService.findOne(1);
+    user.roles.push(adminRole);
+    return this.usersRepository.save(user);
   }
 }

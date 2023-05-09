@@ -16,6 +16,10 @@ export class RolesService {
     return this.rolesRepository.find();
   }
 
+  findOne(id: number): Promise<Role> {
+    return this.rolesRepository.findOne({ where: { id } });
+  }
+
   findDefault(): Promise<Role> {
     return this.rolesRepository.findOneBy({ name: 'user' });
   }
