@@ -6,6 +6,7 @@ import {
   IconChartBar,
   IconChevronDown,
   IconChevronUp,
+  IconDeviceAnalytics,
   IconHeart,
   IconLogout,
   IconShoppingCart,
@@ -17,6 +18,7 @@ export default function Nav() {
   const [opened, { toggle }] = useDisclosure(false);
   const smallerThanSM = useCustomMediaQuery('smaller', 'sm');
   const { me, signOut } = useAuth();
+  const isAdmin = !!me?.roles.find(role => role.name === 'admin');
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -49,9 +51,20 @@ export default function Nav() {
             )}
           </Menu.Target>
           <Menu.Dropdown>
-            <Menu.Item icon={<IconShoppingCart stroke='1' />}>Cart</Menu.Item>
-            <Menu.Item icon={<IconHeart stroke='1' />}>Favorites</Menu.Item>
-            <Menu.Item icon={<IconChartBar stroke='1' />}>Compared</Menu.Item>
+            {isAdmin && (
+              <Menu.Item icon={<IconDeviceAnalytics stroke='1' />} component={Link} to='/admin'>
+                Admin
+              </Menu.Item>
+            )}
+            <Menu.Item icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart'>
+              Cart
+            </Menu.Item>
+            <Menu.Item icon={<IconHeart stroke='1' />} component={Link} to='/favorites'>
+              Favorites
+            </Menu.Item>
+            <Menu.Item icon={<IconChartBar stroke='1' />} component={Link} to='/compared'>
+              Compared
+            </Menu.Item>
             <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut}>
               Sign out
             </Menu.Item>
