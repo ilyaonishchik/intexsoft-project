@@ -1,7 +1,8 @@
-import { ActionIcon, Box, Button, Modal } from '@mantine/core';
+import { ActionIcon, Box, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
+import Modal from './Modal';
 
 export default function Catalog() {
   const smallerThanMD = useCustomMediaQuery('smaller', 'md');
@@ -18,9 +19,7 @@ export default function Catalog() {
           Catalog
         </Button>
       )}
-      <Modal opened={opened} onClose={close} title='Menu'>
-        Modal
-      </Modal>
+      <Modal opened={opened} close={close} />
     </Box>
   );
 }
