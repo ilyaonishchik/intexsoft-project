@@ -1,34 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ParameterCategoriesService } from './parameter-categories.service';
 import { CreateParameterCategoryDto } from './models/dto/create-parameter-category.dto';
-import { UpdateParameterCategoryDto } from './models/dto/update-parameter-category.dto';
+import { ParameterCategory } from './models/entities/parameter-category.entity';
 
 @Controller('parameter-categories')
 export class ParameterCategoriesController {
   constructor(private readonly parameterCategoriesService: ParameterCategoriesService) {}
 
   @Post()
-  create(@Body() createParameterCategoryDto: CreateParameterCategoryDto) {
-    return this.parameterCategoriesService.create(createParameterCategoryDto);
+  create(@Body() dto: CreateParameterCategoryDto): Promise<ParameterCategory> {
+    return this.parameterCategoriesService.create(dto);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<ParameterCategory[]> {
     return this.parameterCategoriesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<ParameterCategory> {
     return this.parameterCategoriesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateParameterCategoryDto: UpdateParameterCategoryDto) {
-    return this.parameterCategoriesService.update(+id, updateParameterCategoryDto);
-  }
-
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.parameterCategoriesService.delete(+id);
-  }
+  // @Delete(':id')
+  // delete(@Param('id') id: string) {
+  //   return this.parameterCategoriesService.delete(+id);
+  // }
 }

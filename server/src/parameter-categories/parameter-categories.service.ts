@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateParameterCategoryDto } from './models/dto/create-parameter-category.dto';
-import { UpdateParameterCategoryDto } from './models/dto/update-parameter-category.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ParameterCategory } from './models/entities/parameter-category.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ParameterCategoriesService {
-  create(createParameterCategoryDto: CreateParameterCategoryDto) {
-    return 'This action adds a new parameterCategory';
+  constructor(
+    @InjectRepository(ParameterCategory) private readonly parameterCategoriesRepository: Repository<ParameterCategory>,
+  ) {}
+
+  create(dto: CreateParameterCategoryDto): Promise<ParameterCategory> {
+    const parameterCategory = this.parameterCategoriesRepository.create(dto);
+    return this.parameterCategoriesRepository.save(parameterCategory);
   }
 
-  findAll() {
-    return `This action returns all parameterCategories`;
+  findAll(): Promise<ParameterCategory[]> {
+    return this.parameterCategoriesRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} parameterCategory`;
+  findOne(id: number): Promise<ParameterCategory> {
+    return this.parameterCategoriesRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateParameterCategoryDto: UpdateParameterCategoryDto) {
-    return `This action updates a #${id} parameterCategory`;
-  }
-
-  delete(id: number) {
-    return `This action deletes a #${id} parameterCategory`;
-  }
+  // delete(id: number) {
+  //   return `This action deletes a #${id} parameterCategory`;
+  // }
 }

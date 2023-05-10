@@ -19,12 +19,12 @@ import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/models/entities/user.entity';
 import { CreateUserDto } from 'src/users/models/dto/create-user.dto';
 import { GoogleGuard } from './guards/google.guard';
-import { JwtPayload } from './models/jwt.payload';
+import { JwtPayload } from './models/payloads/jwt.payload';
 import { SignUpDto } from './models/dto/sign-up.dto';
 import { SignInDto } from './models/dto/sign-in.dto';
 import { JwtGuard } from './guards/jwt.guard';
 import { DecodedUser } from './decorators/decoded-user.decorator';
-import { JwtDecodedPayload } from './models/jwt-decoded.payload';
+import { JwtDecodedPayload } from './models/payloads/jwt-decoded.payload';
 
 @Controller('auth')
 export class AuthController {
