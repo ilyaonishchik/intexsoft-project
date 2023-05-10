@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Image } from './models/image.entity';
+import { Image } from './models/entities/image.entity';
 import { DeleteResult, Repository } from 'typeorm';
-import { CreateImageDto } from './models/create-image.dto';
+import { CreateImageDto } from './models/dto/create-image.dto';
 
 @Injectable()
 export class ImagesService {

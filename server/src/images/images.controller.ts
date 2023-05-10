@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { Image } from './models/image.entity';
+import { Image } from './models/entities/image.entity';
 import { DeleteResult } from 'typeorm';
 
 @Controller('images')

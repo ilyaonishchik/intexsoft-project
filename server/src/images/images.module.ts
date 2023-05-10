@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ImagesService } from './images.service';
-import { Image } from './models/image.entity';
+import { Image } from './models/entities/image.entity';
 import { ImagesController } from './images.controller';
 
 @Module({

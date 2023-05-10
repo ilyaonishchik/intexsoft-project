@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Role } from 'src/roles/models/role.entity';
+import { Role } from 'src/roles/models/entities/role.entity';
 
 @Entity('users')
 export class User {

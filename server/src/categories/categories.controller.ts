@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { CategoriesService } from './categories.service';
 import { ImagesService } from 'src/images/images.service';
 import { CreateCategoryDto } from './models/dto/create-category.dto';
-import { Category } from './models/category.entity';
+import { Category } from './models/entities/category.entity';
 
 @Controller('categories')
 export class CategoriesController {

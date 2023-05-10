@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Image } from 'src/images/models/image.entity';
+import { Image } from 'src/images/models/entities/image.entity';
 
 @Entity('categories')
 export class Category {

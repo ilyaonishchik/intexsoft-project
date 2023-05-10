@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { RolesService } from './roles.service';
-import { Role } from './models/role.entity';
+import { Role } from './models/entities/role.entity';
 
 @Controller('roles')
 export class RolesController {

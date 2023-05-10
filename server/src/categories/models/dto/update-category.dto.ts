@@ -1,4 +1,4 @@
-import { Image } from 'src/images/models/image.entity';
+import { Image } from 'src/images/models/entities/image.entity';
 
 export class UpdateCategoryDto {
   name: string;

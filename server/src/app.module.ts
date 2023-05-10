@@ -11,6 +11,8 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { ImagesModule } from './images/images.module';
 import { CategoriesModule } from './categories/categories.module';
+import { ParametersModule } from './parameters/parameters.module';
+import { ParameterCategoriesModule } from './parameter-categories/parameter-categories.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { CategoriesModule } from './categories/categories.module';
     RolesModule,
     ImagesModule,
     CategoriesModule,
+    ParametersModule,
+    ParameterCategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
