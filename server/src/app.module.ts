@@ -13,6 +13,7 @@ import { ImagesModule } from './images/images.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ParametersModule } from './parameters/parameters.module';
 import { ParameterCategoriesModule } from './parameter-categories/parameter-categories.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { ParameterCategoriesModule } from './parameter-categories/parameter-cate
     CategoriesModule,
     ParametersModule,
     ParameterCategoriesModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
