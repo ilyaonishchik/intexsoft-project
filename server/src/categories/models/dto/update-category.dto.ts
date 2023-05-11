@@ -1,8 +1,4 @@
-import { Image } from 'src/images/models/entities/image.entity';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateCategoryDto } from './create-category.dto';
 
-export class UpdateCategoryDto {
-  name: string;
-  image?: Image;
-  ordinal: number;
-  parentId?: number;
-}
+export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
