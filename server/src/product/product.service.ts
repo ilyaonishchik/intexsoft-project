@@ -1,16 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
+import { CreateProductDto } from './dto/create-product.dto';
+import { Product } from './entities/product.entity';
+import { CategoryService } from 'src/category/category.service';
+import { ImageService } from 'src/image/image.service';
+import { ProductImageService } from 'src/product-image/product-image.service';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectRepository(Product) private readonly productRepository: Repository<Product>) {}
+  constructor(
+    @InjectRepository(Product) private readonly productRepository: Repository<Product>,
+    private readonly categoryService: CategoryService,
+    private readonly imageService: ImageService,
+    private readonly productImageService: ProductImageService,
+  ) {}
 
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  async create({ categoryId, files, name, price, quantity }: CreateProductDto) {
+    const category = await this.categoryService.findOne(categoryId);
+    if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+    const product = new Product();
+    product.category = category;
+    product.name = name;
+    product.price = price;
+    product.quantity = quantity;
+    product.images = [];
+    files.forEach(async (file, index) => {
+      const image = await this.imageService.create({ name: file.filename, alt: name });
+      const productImage = await this.productImageService.create({ image, product, ordinal: index + 1 });
+      product.images.push(productImage);
+    });
+    return this.productRepository.save(product);
   }
 
   findAll(): Promise<Product[]> {
@@ -18,14 +38,6 @@ export class ProductService {
   }
 
   findOne(id: number) {
-    return this.productRepository.findOne({ where: { id } });
+    return this.productRepository.findOne({ where: { id }, relations: { category: true, images: { image: true } } });
   }
-
-  // update(id: number, updateProductDto: UpdateProductDto) {
-  //   return `This action updates a #${id} product`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} product`;
-  // }
 }

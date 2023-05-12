@@ -1,6 +1,14 @@
-import { Image } from 'src/image/models/entities/image.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { ProductImage } from 'src/product-image/entities/product-image.entity';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Category } from 'src/category/models/entities/category.entity';
 
 @Entity('products')
 export class Product {
@@ -16,12 +24,15 @@ export class Product {
   @Column({ unique: true })
   name: string;
 
+  @ManyToOne(() => Category, (category) => category.products)
+  category: Category;
+
   @Column()
   price: number;
 
   @Column()
   quantity: number;
 
-  // @OneToMany(() => ProductImage, (image) => image.product)
-  // images: ProductImage[];
+  @OneToMany(() => ProductImage, (image) => image.product)
+  images: ProductImage[];
 }
