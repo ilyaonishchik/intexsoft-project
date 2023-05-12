@@ -34,7 +34,7 @@ export class ProductService {
   }
 
   findAll(): Promise<Product[]> {
-    return this.productRepository.find();
+    return this.productRepository.find({ relations: { category: true, images: { image: true } } });
   }
 
   findOne(id: number) {

@@ -5,3 +5,5 @@ export * from './SignUpDto';
 export * from './NestError';
 export * from './Image';
 export * from './Category';
+export * from './Product';
+export * from './ProductImage';
