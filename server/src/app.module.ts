@@ -7,13 +7,14 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
-import { ImagesModule } from './images/images.module';
-import { CategoriesModule } from './categories/categories.module';
-import { ParametersModule } from './parameters/parameters.module';
-import { ParameterCategoriesModule } from './parameter-categories/parameter-categories.module';
-import { ProductsModule } from './products/products.module';
+import { UserModule } from './user/user.module';
+import { RoleModule } from './role/role.module';
+import { ImageModule } from './image/image.module';
+import { CategoryModule } from './category/category.module';
+import { ParameterModule } from './parameter/parameter.module';
+import { ParameterCategoryModule } from './parameter-category/parameter-category.module';
+import { ProductModule } from './product/product.module';
+import { ProductImageModule } from './product-image/product-image.module';
 
 @Module({
   imports: [
@@ -41,13 +42,14 @@ import { ProductsModule } from './products/products.module';
       synchronize: true,
     }),
     AuthModule.forRoot(),
-    UsersModule,
-    RolesModule,
-    ImagesModule,
-    CategoriesModule,
-    ParametersModule,
-    ParameterCategoriesModule,
-    ProductsModule,
+    UserModule,
+    RoleModule,
+    ImageModule,
+    CategoryModule,
+    ParameterModule,
+    ParameterCategoryModule,
+    ProductModule,
+    ProductImageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

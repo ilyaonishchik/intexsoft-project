@@ -2,7 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { GoogleStrategy } from './strategies/google.strategy';
-import { UsersModule } from 'src/users/users.module';
+import { UserModule } from 'src/user/user.module';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
@@ -17,7 +17,7 @@ export class AuthModule {
         JwtModule.register({
           secret: process.env.JWT_SECRET,
         }),
-        UsersModule,
+        UserModule,
       ],
       module: AuthModule,
     };
