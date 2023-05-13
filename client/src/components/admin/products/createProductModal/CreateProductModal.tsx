@@ -36,7 +36,7 @@ export default function CreateProductModal({ opened, close }: Props) {
     },
   });
 
-  const { trigger } = useCreateProduct();
+  const { trigger, isMutating } = useCreateProduct();
 
   const handleSubmit = form.onSubmit(values => {
     const formData = new FormData();
@@ -68,7 +68,7 @@ export default function CreateProductModal({ opened, close }: Props) {
           <TextInput label='Name' {...form.getInputProps('name')} />
           <NumberInput label='Price ($)' min={0} {...form.getInputProps('price')} />
           <NumberInput label='Quantity' min={0} {...form.getInputProps('quantity')} />
-          <Button type='submit' sx={{ alignSelf: 'end' }}>
+          <Button type='submit' sx={{ alignSelf: 'end' }} loading={isMutating}>
             Create
           </Button>
         </Stack>
