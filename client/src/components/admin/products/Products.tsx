@@ -8,7 +8,7 @@ export default function Products() {
   return (
     <div>
       <Button onClick={open}>Create product</Button>
-      <CreateProductModal opened={opened} onClose={close} />
+      <CreateProductModal opened={opened} close={close} />
     </div>
   );
 }

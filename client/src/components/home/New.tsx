@@ -1,5 +1,5 @@
 import { Container, Stack, Title } from '@mantine/core';
-import { useProducts } from '../../hooks/swr/useProducts';
+import { useProducts } from '../../hooks/swr/product/useProducts';
 import { Loading, Error, ProductCard } from '../common';
 
 export default function New() {

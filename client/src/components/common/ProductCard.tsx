@@ -12,11 +12,13 @@ export default function ProductCard({ product }: Props) {
     <Card w={280} withBorder shadow='sm' radius='md'>
       <Card.Section py='md'>
         <Carousel>
-          {product.images?.map(image => (
-            <Carousel.Slide key={image.id}>
-              <Image src={`${import.meta.env.VITE_SERVER_URL}/${image.image.name}`} height={200} fit='contain' />
-            </Carousel.Slide>
-          ))}
+          {product.images
+            ?.sort((a, b) => a.ordinal - b.ordinal)
+            .map(image => (
+              <Carousel.Slide key={image.id}>
+                <Image src={`${import.meta.env.VITE_SERVER_URL}/${image.image.name}`} height={200} fit='contain' />
+              </Carousel.Slide>
+            ))}
         </Carousel>
       </Card.Section>
       <Stack spacing='xs'>

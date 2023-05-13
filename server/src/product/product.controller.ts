@@ -24,10 +24,7 @@ export class ProductController {
     }),
   )
   create(@Body() dto: CreateProductDto, @UploadedFiles() files: Express.Multer.File[]) {
-    return this.productService.create({
-      ...dto,
-      files: files.sort((a, b) => a.originalname.localeCompare(b.originalname)),
-    });
+    return this.productService.create({ ...dto, files });
   }
 
   @Get()
