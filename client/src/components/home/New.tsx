@@ -3,10 +3,11 @@ import { useProducts } from '../../hooks/swr/product/useProducts';
 import { Loading, Error, ProductCard } from '../common';
 
 export default function New() {
-  const { isLoading, error, data: products } = useProducts();
+  const { error, data } = useProducts({ take: 8 });
 
-  if (isLoading) return <Loading />;
+  if (!data) return <Loading />;
   if (error) return <Error />;
+  const [products] = data;
 
   return (
     <Container size='xl'>

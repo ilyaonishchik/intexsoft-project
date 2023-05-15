@@ -33,8 +33,8 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  findAll(): Promise<Product[]> {
-    return this.productRepository.find({ relations: { category: true, images: { image: true } } });
+  findAll(skip: number, take: number): Promise<[Product[], number]> {
+    return this.productRepository.findAndCount({ relations: { category: true, images: { image: true } }, skip, take });
   }
 
   findOne(id: number) {

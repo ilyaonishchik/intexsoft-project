@@ -46,10 +46,7 @@ export default function CreateProductModal({ opened, close }: Props) {
     formData.append('price', String(values.price));
     formData.append('quantity', String(values.quantity));
     trigger({ formData })
-      .then(res => {
-        console.log(res);
-        notifications.show({ message: 'Product successfully created', color: 'green' });
-      })
+      .then(() => notifications.show({ message: 'Product successfully created', color: 'green' }))
       .catch((err: Error) => notifications.show({ message: err.message, color: 'red' }))
       .finally(() => close());
   });

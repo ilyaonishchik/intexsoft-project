@@ -7,6 +7,7 @@ import {
   IconChevronDown,
   IconChevronUp,
   IconDeviceAnalytics,
+  IconDeviceMobile,
   IconHeart,
   IconLogout,
   IconShoppingCart,
@@ -52,9 +53,16 @@ export default function Nav() {
           </Menu.Target>
           <Menu.Dropdown>
             {isAdmin && (
-              <Menu.Item icon={<IconDeviceAnalytics stroke='1' />} component={Link} to='/admin'>
-                Admin
-              </Menu.Item>
+              <>
+                <Menu.Label>Admin</Menu.Label>
+                <Menu.Item icon={<IconDeviceAnalytics stroke='1' />} component={Link} to='/admin/dashboard'>
+                  Dashboard
+                </Menu.Item>
+                <Menu.Item icon={<IconDeviceMobile stroke='1' />} component={Link} to='/admin/products'>
+                  Products
+                </Menu.Item>
+                <Menu.Divider />
+              </>
             )}
             <Menu.Item icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart'>
               Cart

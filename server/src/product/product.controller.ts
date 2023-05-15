@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UploadedFiles, UseInterceptors, Query } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { v4 } from 'uuid';
 import { diskStorage } from 'multer';
@@ -28,22 +28,12 @@ export class ProductController {
   }
 
   @Get()
-  findAll(): Promise<Product[]> {
-    return this.productService.findAll();
+  findAll(@Query('skip') skip = 1, @Query('take') take = 10): Promise<[Product[], number]> {
+    return this.productService.findAll(skip, take);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productService.findOne(+id);
   }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-  //   return this.productsService.update(+id, updateProductDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.productsService.remove(+id);
-  // }
 }
