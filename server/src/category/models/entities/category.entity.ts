@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Image } from 'src/image/models/entities/image.entity';
-import { Product } from 'src/product/entities/product.entity';
+import { Product } from 'src/product/models/entities/product.entity';
 
 @Entity('categories')
 export class Category {

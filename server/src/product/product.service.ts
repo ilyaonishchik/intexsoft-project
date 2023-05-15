@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateProductDto } from './dto/create-product.dto';
-import { Product } from './entities/product.entity';
+import { CreateProductDto } from './models/dto/create-product.dto';
+import { Product } from './models/entities/product.entity';
 import { CategoryService } from 'src/category/category.service';
 import { ImageService } from 'src/image/image.service';
 import { ProductImageService } from 'src/product-image/product-image.service';
+import { OrderEnum } from 'src/_common/enums/order.enum';
 
 @Injectable()
 export class ProductService {
@@ -33,8 +34,13 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  findAll(skip: number, take: number): Promise<[Product[], number]> {
-    return this.productRepository.findAndCount({ relations: { category: true, images: { image: true } }, skip, take });
+  findAll(skip: number, take: number, sortBy: string, order: OrderEnum): Promise<[Product[], number]> {
+    return this.productRepository.findAndCount({
+      relations: { category: true, images: { image: true } },
+      skip,
+      take,
+      order: { [sortBy]: order },
+    });
   }
 
   findOne(id: number) {

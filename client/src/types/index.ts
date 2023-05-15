@@ -8,3 +8,4 @@ export * from './Category';
 export * from './Product';
 export * from './ProductImage';
 export * from './PaginationArgs';
+export * from './SortingArgs';

@@ -1,16 +1,17 @@
-import { useState } from 'react';
 import { Group, Table as MantineTable, Pagination, Select, Stack, Text } from '@mantine/core';
 import { useProducts } from '../../../hooks/swr/product/useProducts';
 import { Loading, Error } from '../../common';
 import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
+import { usePagination } from '../../../hooks/usePagination';
+import { useSorting } from '../../../hooks/useSorting';
 
 export default function Table() {
-  const [page, setPage] = useState(1);
-  const [take, setTake] = useState<string | null>('3');
-
-  const { error, data } = useProducts({ skip: (page - 1) * Number(take), take: Number(take) });
-
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
+
+  const { page, setPage, take, setTake } = usePagination();
+  const { sortBy, setSortBy, order, setOrder } = useSorting('updatedAt', 'desc');
+
+  const { error, data } = useProducts({ skip: (page - 1) * Number(take), take, sortBy, order });
 
   if (!data) return <Loading />;
   if (error) return <Error />;
@@ -21,11 +22,23 @@ export default function Table() {
       <Group>
         <Group spacing='xs'>
           <Text size='sm'>Sort by:</Text>
-          <Select defaultValue='created' data={['name', 'price', 'created', 'updated']} maw={90} size='xs' />
+          <Select
+            data={[
+              'name',
+              'price',
+              'quantity',
+              { label: 'created', value: 'createdAt' },
+              { label: 'updated', value: 'updatedAt' },
+            ]}
+            value={sortBy}
+            onChange={value => setSortBy(value!)}
+            maw={90}
+            size='xs'
+          />
         </Group>
         <Group spacing='xs'>
           <Text size='sm'>Order:</Text>
-          <Select defaultValue='desc' data={['asc', 'desc']} maw={75} size='xs' />
+          <Select data={['asc', 'desc']} value={order} onChange={value => setOrder(value!)} maw={75} size='xs' />
         </Group>
       </Group>
       <MantineTable striped>
@@ -56,7 +69,13 @@ export default function Table() {
         <Pagination total={Math.ceil(count / Number(take))} value={page} onChange={setPage} size='sm' />
         <Group spacing='xs'>
           <Text size='sm'>Show:</Text>
-          <Select data={['1', '2', '3', '4', '5', '10']} value={take} onChange={setTake} size='xs' maw={60} />
+          <Select
+            data={['1', '2', '3', '4', '5', '10']}
+            value={String(take)}
+            onChange={value => setTake(Number(value))}
+            size='xs'
+            maw={60}
+          />
         </Group>
       </Group>
     </Stack>

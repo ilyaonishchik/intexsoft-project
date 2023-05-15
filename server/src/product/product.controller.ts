@@ -3,8 +3,9 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { v4 } from 'uuid';
 import { diskStorage } from 'multer';
 import { ProductService } from './product.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { Product } from './entities/product.entity';
+import { CreateProductDto } from './models/dto/create-product.dto';
+import { Product } from './models/entities/product.entity';
+import { OrderEnum } from 'src/_common/enums/order.enum';
 
 @Controller('products')
 export class ProductController {
@@ -28,8 +29,13 @@ export class ProductController {
   }
 
   @Get()
-  findAll(@Query('skip') skip = 1, @Query('take') take = 10): Promise<[Product[], number]> {
-    return this.productService.findAll(skip, take);
+  findAll(
+    @Query('skip') skip = 0,
+    @Query('take') take = 10,
+    @Query('sortBy') sortBy = 'updatedAt',
+    @Query('order') order = OrderEnum.desc,
+  ): Promise<[Product[], number]> {
+    return this.productService.findAll(skip, take, sortBy, order);
   }
 
   @Get(':id')
