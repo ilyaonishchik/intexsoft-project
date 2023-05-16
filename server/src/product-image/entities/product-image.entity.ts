@@ -7,7 +7,7 @@ export class ProductImage {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => Product, (product) => product.images)
+  @ManyToOne(() => Product, (product) => product.images, { onDelete: 'CASCADE' })
   product: Product;
 
   @ManyToOne(() => Image, (image) => image.productImages)

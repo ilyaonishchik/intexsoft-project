@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UploadedFiles, UseInterceptors, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UploadedFiles, UseInterceptors, Query, Delete } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { v4 } from 'uuid';
 import { diskStorage } from 'multer';
@@ -6,6 +6,7 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
 import { OrderEnum } from 'src/_common/enums/order.enum';
+import { DeleteResult } from 'typeorm';
 
 @Controller('products')
 export class ProductController {
@@ -39,7 +40,12 @@ export class ProductController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+  findOne(@Param('id') id: number): Promise<Product> {
+    return this.productService.findOne(id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number): Promise<DeleteResult> {
+    return this.productService.delete(id);
   }
 }

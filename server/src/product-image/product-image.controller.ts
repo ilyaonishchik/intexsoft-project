@@ -8,8 +8,8 @@ export class ProductImageController {
   constructor(private readonly productImageService: ProductImageService) {}
 
   @Post()
-  create(@Body() createProductsImageDto: CreateProductImageDto) {
-    return this.productImageService.create(createProductsImageDto);
+  create(@Body() dto: CreateProductImageDto) {
+    return this.productImageService.create(dto);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class ProductImageController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductsImageDto: UpdateProductImageDto) {
-    return this.productImageService.update(+id, updateProductsImageDto);
+  update(@Param('id') id: string, @Body() dto: UpdateProductImageDto) {
+    return this.productImageService.update(+id, dto);
   }
 
   @Delete(':id')

@@ -33,6 +33,6 @@ export class Product {
   @Column()
   quantity: number;
 
-  @OneToMany(() => ProductImage, (image) => image.product)
+  @OneToMany(() => ProductImage, (image) => image.product, { cascade: true })
   images: ProductImage[];
 }

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
 import { CategoryService } from 'src/category/category.service';
@@ -17,21 +17,15 @@ export class ProductService {
     private readonly productImageService: ProductImageService,
   ) {}
 
-  async create({ categoryId, files, name, price, quantity }: CreateProductDto) {
+  async create({ categoryId, files, name, price, quantity }: CreateProductDto): Promise<Product> {
     const category = await this.categoryService.findOne(categoryId);
     if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
-    const product = new Product();
-    product.category = category;
-    product.name = name;
-    product.price = price;
-    product.quantity = quantity;
-    product.images = [];
+    const product = await this.productRepository.save({ category, name, price, quantity });
     files.forEach(async (file, index) => {
       const image = await this.imageService.create({ name: file.filename, alt: name });
-      const productImage = await this.productImageService.create({ image, product, ordinal: index + 1 });
-      product.images.push(productImage);
+      await this.productImageService.create({ image, product, ordinal: index + 1 });
     });
-    return this.productRepository.save(product);
+    return product;
   }
 
   findAll(skip: number, take: number, sortBy: string, order: OrderEnum): Promise<[Product[], number]> {
@@ -43,7 +37,11 @@ export class ProductService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Product> {
     return this.productRepository.findOne({ where: { id }, relations: { category: true, images: { image: true } } });
+  }
+
+  delete(id: number): Promise<DeleteResult> {
+    return this.productRepository.delete({ id });
   }
 }

@@ -12,6 +12,6 @@ export class Image {
   @Column()
   alt: string;
 
-  @OneToMany(() => ProductImage, (productImage) => productImage.image)
+  @OneToMany(() => ProductImage, (productImage) => productImage.image, { cascade: true })
   productImages: ProductImage[];
 }

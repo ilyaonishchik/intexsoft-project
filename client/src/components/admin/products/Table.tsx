@@ -8,7 +8,7 @@ import { useSorting } from '../../../hooks/useSorting';
 export default function Table() {
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
 
-  const { page, setPage, take, setTake } = usePagination();
+  const { page, setPage, take, setTake } = usePagination(1, 10);
   const { sortBy, setSortBy, order, setOrder } = useSorting('updatedAt', 'desc');
 
   const { error, data } = useProducts({ skip: (page - 1) * Number(take), take, sortBy, order });
@@ -70,7 +70,7 @@ export default function Table() {
         <Group spacing='xs'>
           <Text size='sm'>Show:</Text>
           <Select
-            data={['1', '2', '3', '4', '5', '10']}
+            data={['1', '5', '10']}
             value={String(take)}
             onChange={value => setTake(Number(value))}
             size='xs'
