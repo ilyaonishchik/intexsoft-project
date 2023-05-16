@@ -2,7 +2,7 @@ import { Button, Container, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import CreateProductModal from './createProductModal/CreateProductModal';
-import Table from './Table';
+import Table from './table/Table';
 
 export default function Products() {
   const [opened, { open, close }] = useDisclosure(false);

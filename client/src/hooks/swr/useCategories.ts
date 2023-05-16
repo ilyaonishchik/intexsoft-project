@@ -8,7 +8,4 @@ const fetcher = async (url: string) => {
   return categories;
 };
 
-export const useCategories = () =>
-  useSWR<Category[], Error>(`${import.meta.env.VITE_SERVER_URL}/categories`, fetcher, {
-    revalidateOnFocus: false,
-  });
+export const useCategories = () => useSWR<Category[], Error>(`${import.meta.env.VITE_SERVER_URL}/categories`, fetcher);

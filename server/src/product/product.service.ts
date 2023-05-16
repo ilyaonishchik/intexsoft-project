@@ -7,6 +7,7 @@ import { CategoryService } from 'src/category/category.service';
 import { ImageService } from 'src/image/image.service';
 import { ProductImageService } from 'src/product-image/product-image.service';
 import { OrderEnum } from 'src/_common/enums/order.enum';
+import { MessageResponse } from 'src/_common/message.response';
 
 @Injectable()
 export class ProductService {
@@ -41,7 +42,8 @@ export class ProductService {
     return this.productRepository.findOne({ where: { id }, relations: { category: true, images: { image: true } } });
   }
 
-  delete(id: number): Promise<DeleteResult> {
-    return this.productRepository.delete({ id });
+  async delete(id: number): Promise<MessageResponse> {
+    await this.productRepository.delete({ id });
+    return { message: `Product with id ${id} deleted succesfully` };
   }
 }

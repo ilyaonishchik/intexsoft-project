@@ -7,6 +7,7 @@ import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
 import { OrderEnum } from 'src/_common/enums/order.enum';
 import { DeleteResult } from 'typeorm';
+import { MessageResponse } from 'src/_common/message.response';
 
 @Controller('products')
 export class ProductController {
@@ -45,7 +46,7 @@ export class ProductController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number): Promise<DeleteResult> {
+  delete(@Param('id') id: number): Promise<MessageResponse> {
     return this.productService.delete(id);
   }
 }

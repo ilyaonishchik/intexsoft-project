@@ -1,3 +1,4 @@
+import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { Product } from '../../../types';
 
@@ -12,4 +13,8 @@ const fetcher = async (url: string, { arg }: { arg: { formData: FormData } }) =>
   return product;
 };
 
-export const useCreateProduct = () => useSWRMutation(`${import.meta.env.VITE_SERVER_URL}/products`, fetcher);
+export const useCreateProduct = () =>
+  useSWRMutation(`${import.meta.env.VITE_SERVER_URL}/products`, fetcher, {
+    onSuccess: () =>
+      mutate(key => typeof key === 'string' && key.startsWith(`${import.meta.env.VITE_SERVER_URL}/products`)),
+  });

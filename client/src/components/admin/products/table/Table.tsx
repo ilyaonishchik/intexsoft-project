@@ -1,14 +1,15 @@
 import { Group, Table as MantineTable, Pagination, Select, Stack, Text } from '@mantine/core';
-import { useProducts } from '../../../hooks/swr/product/useProducts';
-import { Loading, Error } from '../../common';
-import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
-import { usePagination } from '../../../hooks/usePagination';
-import { useSorting } from '../../../hooks/useSorting';
+import { useProducts } from '../../../../hooks/swr/product/useProducts';
+import { Loading, Error } from '../../../common';
+import { useCustomMediaQuery } from '../../../../hooks/useCustomMediaQuery';
+import { usePagination } from '../../../../hooks/usePagination';
+import { useSorting } from '../../../../hooks/useSorting';
+import TableItem from './TableItem';
 
 export default function Table() {
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
 
-  const { page, setPage, take, setTake } = usePagination(1, 10);
+  const { page, setPage, take, setTake } = usePagination(1, 20);
   const { sortBy, setSortBy, order, setOrder } = useSorting('updatedAt', 'desc');
 
   const { error, data } = useProducts({ skip: (page - 1) * Number(take), take, sortBy, order });
@@ -41,7 +42,7 @@ export default function Table() {
           <Select data={['asc', 'desc']} value={order} onChange={value => setOrder(value!)} maw={75} size='xs' />
         </Group>
       </Group>
-      <MantineTable striped>
+      <MantineTable striped highlightOnHover>
         <thead>
           <tr>
             {largerThanSM && <th>ID</th>}
@@ -54,14 +55,7 @@ export default function Table() {
         </thead>
         <tbody>
           {products.map(product => (
-            <tr key={product.id}>
-              {largerThanSM && <td>{product.id}</td>}
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.quantity}</td>
-              {largerThanSM && <td>{new Date(product.createdAt).toLocaleDateString()}</td>}
-              {largerThanSM && <td>{new Date(product.updatedAt).toLocaleDateString()}</td>}
-            </tr>
+            <TableItem key={product.id} product={product} />
           ))}
         </tbody>
       </MantineTable>
@@ -70,7 +64,7 @@ export default function Table() {
         <Group spacing='xs'>
           <Text size='sm'>Show:</Text>
           <Select
-            data={['1', '5', '10']}
+            data={['1', '5', '10', '20']}
             value={String(take)}
             onChange={value => setTake(Number(value))}
             size='xs'
