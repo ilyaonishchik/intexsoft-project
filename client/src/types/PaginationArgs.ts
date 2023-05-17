@@ -1,4 +1,4 @@
 export type PaginationArgs = {
-  skip?: number;
-  take?: number;
+  skip: number;
+  take: number;
 };

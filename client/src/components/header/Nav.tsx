@@ -1,16 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Button, Menu } from '@mantine/core';
+import { Avatar, Button, Menu, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import {
   IconChartBar,
   IconChevronDown,
   IconChevronUp,
-  IconDeviceAnalytics,
   IconDeviceMobile,
   IconHeart,
+  IconLayoutDashboard,
   IconLogout,
   IconShoppingCart,
+  IconUserShield,
 } from '@tabler/icons-react';
 import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
 import { useAuth } from '../../lib/auth/useAuth';
@@ -54,25 +55,27 @@ export default function Nav() {
           <Menu.Dropdown>
             {isAdmin && (
               <>
-                <Menu.Label>Admin</Menu.Label>
-                <Menu.Item icon={<IconDeviceAnalytics stroke='1' />} component={Link} to='/admin/dashboard'>
-                  Dashboard
-                </Menu.Item>
-                <Menu.Item icon={<IconDeviceMobile stroke='1' />} component={Link} to='/admin/products'>
-                  Products
-                </Menu.Item>
+                <NavLink label='Admin' icon={<IconUserShield stroke='1' />}>
+                  <NavLink
+                    label='Dashboard'
+                    icon={<IconLayoutDashboard stroke='1' />}
+                    component={Link}
+                    to='/admin/dashboard'
+                  />
+                  <NavLink
+                    label='Products'
+                    icon={<IconDeviceMobile stroke='1' />}
+                    component={Link}
+                    to='/admin/products'
+                  />
+                </NavLink>
                 <Menu.Divider />
               </>
             )}
-            <Menu.Item icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart'>
-              Cart
-            </Menu.Item>
-            <Menu.Item icon={<IconHeart stroke='1' />} component={Link} to='/favorites'>
-              Favorites
-            </Menu.Item>
-            <Menu.Item icon={<IconChartBar stroke='1' />} component={Link} to='/compared'>
-              Compared
-            </Menu.Item>
+            <NavLink label='Cart' icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart' />
+            <NavLink label='Favorites' icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
+            <NavLink label='Compared' icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
+            <Menu.Divider />
             <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut}>
               Sign out
             </Menu.Item>

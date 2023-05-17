@@ -7,7 +7,7 @@ const fetcher = async (url: string) => {
   return (await response.json()) as [Product[], number];
 };
 
-type Args = PaginationArgs & SortingArgs;
+type Args = Partial<PaginationArgs> & Partial<SortingArgs>;
 
 export const useProducts = ({ skip = 0, take = 10, sortBy = 'updatedAt', order = 'desc' }: Args) => {
   return useSWR<[Product[], number], Error>(

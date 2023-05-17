@@ -59,7 +59,7 @@ export default function Table() {
           ))}
         </tbody>
       </MantineTable>
-      <Group position='apart'>
+      <Group position='center'>
         <Pagination total={Math.ceil(count / Number(take))} value={page} onChange={setPage} size='sm' />
         <Group spacing='xs'>
           <Text size='sm'>Show:</Text>

@@ -33,6 +33,7 @@ export default function TableItem({ product }: Props) {
         </tr>
       </Menu.Target>
       <Menu.Dropdown>
+        <Menu.Item>Show in catalog</Menu.Item>
         <Menu.Item onClick={handleDelete} icon={<IconTrash stroke={1} size={20} />} color='red'>
           Delete
         </Menu.Item>
