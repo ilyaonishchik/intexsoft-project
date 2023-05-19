@@ -49,11 +49,9 @@ export default function Slider() {
       <Swiper modules={[EffectCube, Autoplay]} effect='cube' loop autoplay={{ delay: 10000 }}>
         {banners.map(banner => (
           <SwiperSlide key={banner.id}>
-            <Link to={banner.href}>
-              <Box component={Link} to={banner.href} className={classes.box}>
-                <img src={banner.imageUrl} alt='' className={classes.image} />
-              </Box>
-            </Link>
+            <Box component={Link} to={banner.href} className={classes.box}>
+              <img src={banner.imageUrl} alt='' className={classes.image} />
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>

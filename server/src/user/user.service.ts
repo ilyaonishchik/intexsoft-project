@@ -4,18 +4,21 @@ import { Repository } from 'typeorm';
 import { User } from './models/entities/user.entity';
 import { RoleService } from 'src/role/role.service';
 import { CreateUserDto } from './models/dto/create-user.dto';
+import { CartService } from 'src/cart/cart.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly roleService: RoleService,
+    private readonly cartService: CartService,
   ) {}
 
   async create(dto: CreateUserDto): Promise<User> {
     const defaultRole = await this.roleService.findDefault();
-    const user = this.userRepository.create({ ...dto, roles: [defaultRole] });
-    return this.userRepository.save(user);
+    const user = await this.userRepository.save({ ...dto, roles: [defaultRole] });
+    await this.cartService.create(user);
+    return user;
   }
 
   findAll(): Promise<User[]> {

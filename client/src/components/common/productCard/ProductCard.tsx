@@ -1,14 +1,16 @@
-import { ActionIcon, Badge, Button, Card, Flex, Group, Image, Stack, Text } from '@mantine/core';
+import { Badge, Card, Flex, Group, Image, Stack, Text } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import { IconChartBar, IconHeart, IconShoppingCart } from '@tabler/icons-react';
-import { Product } from '../../types';
+import { Product } from '../../../types';
+import CartButton from './cartButton/CartButton';
+import ComapredButton from './comparedButton/ComapredButton';
+import FavoritesButton from './favoritesButton/FavoritesButton';
 
 type Props = {
   product: Product;
 };
 
 export default function ProductCard({ product }: Props) {
-  const isNew = Date.now() - new Date(product.createdAt).getTime() < 1000 * 60 * 60 * 24 * 3;
+  const isNew = Date.now() - new Date(product.createdAt).getTime() < 1000 * 60 * 60 * 24 * 7;
 
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column' }} w={280} h='100%' withBorder shadow='sm' radius='md'>
@@ -42,13 +44,9 @@ export default function ProductCard({ product }: Props) {
           ${product.price}
         </Text>
         <Group position='apart'>
-          <ActionIcon size='lg' color='red'>
-            <IconHeart stroke={1} />
-          </ActionIcon>
-          <ActionIcon size='lg' color='cyan'>
-            <IconChartBar stroke={1} />
-          </ActionIcon>
-          <Button leftIcon={<IconShoppingCart stroke={1} />}>Add to cart</Button>
+          <FavoritesButton />
+          <ComapredButton />
+          <CartButton productId={product.id} />
         </Group>
       </Flex>
     </Card>

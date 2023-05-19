@@ -10,3 +10,5 @@ export * from './ProductImage';
 export * from './PaginationArgs';
 export * from './SortingArgs';
 export * from './MessageResponse';
+export * from './Cart';
+export * from './CartItem';

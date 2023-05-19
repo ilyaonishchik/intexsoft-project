@@ -11,5 +11,6 @@ import { ProductImageModule } from 'src/product-image/product-image.module';
   imports: [TypeOrmModule.forFeature([Product]), CategoryModule, ImageModule, ProductImageModule],
   controllers: [ProductController],
   providers: [ProductService],
+  exports: [ProductService],
 })
 export class ProductModule {}

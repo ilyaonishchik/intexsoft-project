@@ -15,6 +15,8 @@ import { ParameterModule } from './parameter/parameter.module';
 import { ParameterCategoryModule } from './parameter-category/parameter-category.module';
 import { ProductModule } from './product/product.module';
 import { ProductImageModule } from './product-image/product-image.module';
+import { CartModule } from './cart/cart.module';
+import { CartItemModule } from './cart-item/cart-item.module';
 
 @Module({
   imports: [
@@ -50,6 +52,8 @@ import { ProductImageModule } from './product-image/product-image.module';
     ParameterCategoryModule,
     ProductModule,
     ProductImageModule,
+    CartModule,
+    CartItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],
