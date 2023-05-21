@@ -18,6 +18,8 @@ import { ProductImageModule } from './product-image/product-image.module';
 import { CartModule } from './cart/cart.module';
 import { CartItemModule } from './cart-item/cart-item.module';
 import { PaymentModule } from './payment/payment.module';
+import { OrderModule } from './order/order.module';
+import { OrderItemModule } from './order-item/order-item.module';
 
 @Module({
   imports: [
@@ -42,7 +44,7 @@ import { PaymentModule } from './payment/payment.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      // synchronize: true,
+      synchronize: true,
     }),
     AuthModule.forRoot(),
     UserModule,
@@ -56,6 +58,8 @@ import { PaymentModule } from './payment/payment.module';
     CartModule,
     CartItemModule,
     PaymentModule,
+    OrderModule,
+    OrderItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 import { Image } from 'src/image/models/entities/image.entity';
 import { Product } from 'src/product/models/entities/product.entity';
 
-@Entity('categories')
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn('increment')
   id: number;

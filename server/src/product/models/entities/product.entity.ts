@@ -11,7 +11,7 @@ import { ProductImage } from 'src/product-image/entities/product-image.entity';
 import { Category } from 'src/category/models/entities/category.entity';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 
-@Entity('products')
+@Entity('product')
 export class Product {
   @PrimaryGeneratedColumn('increment')
   id: number;

@@ -1,7 +1,7 @@
 import { ProductImage } from 'src/product-image/entities/product-image.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('images')
+@Entity('image')
 export class Image {
   @PrimaryGeneratedColumn('increment')
   id: number;

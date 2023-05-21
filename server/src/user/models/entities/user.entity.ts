@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Role } from 'src/role/models/entities/role.entity';
 
-@Entity('users')
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -49,7 +49,7 @@ export class User {
 
   @ManyToMany(() => Role, (role) => role.users)
   @JoinTable({
-    name: 'users_roles',
+    name: 'user_role',
     joinColumn: { name: 'userId' },
     inverseJoinColumn: { name: 'roleId' },
   })

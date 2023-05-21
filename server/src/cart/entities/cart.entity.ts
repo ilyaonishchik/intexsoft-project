@@ -2,7 +2,7 @@ import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { User } from 'src/user/models/entities/user.entity';
 import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('carts')
+@Entity('cart')
 export class Cart {
   @PrimaryGeneratedColumn('uuid')
   id: number;

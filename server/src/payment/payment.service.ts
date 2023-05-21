@@ -1,7 +1,6 @@
-import { ICreatePayment, ICreateWebHook, IPaymentList, Payment, WebHook, YooCheckout } from '@a2seven/yoo-checkout';
 import { Injectable } from '@nestjs/common';
 import { v4 } from 'uuid';
-import * as crypto from 'crypto';
+import { ICreatePayment, IPaymentList, Payment, YooCheckout } from '@a2seven/yoo-checkout';
 
 @Injectable()
 export class PaymentService {
@@ -47,23 +46,6 @@ export class PaymentService {
     } catch (e) {
       throw new Error(e);
     }
-  }
-
-  createWebhook(): Promise<WebHook> {
-    const checkout = this.createCheckout();
-    const payload: ICreateWebHook = {
-      event: 'payment.succeeded',
-      url: `https://127.0.0.1:443/payments/webhooks`,
-    };
-    try {
-      checkout
-        .createWebHook(payload, v4())
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    } catch (e) {
-      throw new Error(e);
-    }
-    return;
   }
 
   async handleNotification(notification: any): Promise<void> {

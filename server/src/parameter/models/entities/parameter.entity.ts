@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ParameterCategory } from 'src/parameter-category/models/entities/parameter-category.entity';
 import { ParameterType } from '../unions/parameter-type.union';
 
-@Entity('parameters')
+@Entity('parameter')
 export class Parameter {
   @PrimaryGeneratedColumn('increment')
   id: number;
