@@ -15,12 +15,10 @@ async function bootstrap() {
 
   const server = express();
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
-  // app.enableCors({ origin: process.env.CLIENT_URL, credentials: true });
   app.enableCors({
     origin: [process.env.CLIENT_URL, 'https://yookassa.ru'],
     credentials: true,
   });
-  // app.enableCors({ origin: true, credentials: true });
   app.use(cookieParser());
   await app.init();
 

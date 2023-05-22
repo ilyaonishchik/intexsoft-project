@@ -22,6 +22,6 @@ export class CartItemService {
 
   async delete(id: number): Promise<MessageResponse> {
     await this.cartItemRepository.delete({ id });
-    return { message: `Cart item with id ${id} deleted succesfully` };
+    return { message: `Cart item with id ${id} deleted successfully` };
   }
 }

@@ -21,9 +21,4 @@ export class ParameterCategoryController {
   findOne(@Param('id') id: string): Promise<ParameterCategory> {
     return this.parameterCategoryService.findOne(+id);
   }
-
-  // @Delete(':id')
-  // delete(@Param('id') id: string) {
-  //   return this.parameterCategoriesService.delete(+id);
-  // }
 }

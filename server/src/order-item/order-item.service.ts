@@ -1,4 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject, forwardRef } from '@nestjs/common';
+import { OrderItem } from './models/entities/order-item.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateOrderItemDto } from './models/dto/create-order-item.dto';
+import { OrderService } from 'src/order/order.service';
+import { ProductService } from 'src/product/product.service';
 
 @Injectable()
-export class OrderItemService {}
+export class OrderItemService {
+  constructor(
+    @InjectRepository(OrderItem) private readonly orderItemRepository: Repository<OrderItem>,
+    @Inject(forwardRef(() => OrderService)) private readonly orderService: OrderService,
+    private readonly productService: ProductService,
+  ) {}
+
+  async create({ orderId, productId }: CreateOrderItemDto): Promise<OrderItem> {
+    const order = await this.orderService.findOne(orderId);
+    if (!order) throw new NotFoundException(`Order with id ${orderId} not found`);
+    const product = await this.productService.findOne(productId);
+    if (!product) throw new NotFoundException(`Product with id ${orderId} not found`);
+    const orderItem = this.orderItemRepository.create({ order, product });
+    return this.orderItemRepository.save(orderItem);
+  }
+}

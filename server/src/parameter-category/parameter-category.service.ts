@@ -22,8 +22,4 @@ export class ParameterCategoryService {
   findOne(id: number): Promise<ParameterCategory> {
     return this.parameterCategoryRepository.findOne({ where: { id } });
   }
-
-  // delete(id: number) {
-  //   return `This action deletes a #${id} parameterCategory`;
-  // }
 }

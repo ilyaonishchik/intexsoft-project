@@ -22,10 +22,10 @@ export class CartController {
   @Post()
   @UseGuards(JwtGuard)
   async createCartItem(
-    @DecodedUser() { email }: JwtDecodedPayload,
+    @DecodedUser() { id }: JwtDecodedPayload,
     @Body() { productId, quantity }: CreateCartItemDto,
   ): Promise<CartItem> {
-    const cart = await this.cartService.findOneByUserEmail(email);
+    const cart = await this.cartService.findOneByUserId(id);
     const product = await this.productService.findOne(productId);
     if (!product) throw new NotFoundException(`Product with id ${productId} not found`);
     const cartItem = cart.items.find((item) => item.product.id === productId);
@@ -35,8 +35,8 @@ export class CartController {
 
   @Get()
   @UseGuards(JwtGuard)
-  findOne(@DecodedUser() { email }: JwtDecodedPayload): Promise<Cart> {
-    return this.cartService.findOneByUserEmail(email);
+  findOne(@DecodedUser() { id }: JwtDecodedPayload): Promise<Cart> {
+    return this.cartService.findOneByUserId(id);
   }
 
   @Put(':cartItemId')
@@ -49,5 +49,11 @@ export class CartController {
   @UseGuards(JwtGuard)
   deleteCartItem(@Param('cartItemId') cartItemId: number): Promise<MessageResponse> {
     return this.cartItemService.delete(cartItemId);
+  }
+
+  @Post('clear')
+  @UseGuards(JwtGuard)
+  clear(@DecodedUser() { id }: JwtDecodedPayload) {
+    return this.cartService.clear(id);
   }
 }

@@ -40,7 +40,7 @@ export class AuthController {
     const createUserDto: CreateUserDto = req.user;
     let user = await this.userService.findOneByEmail(createUserDto.email);
     if (!user) user = await this.userService.create(createUserDto);
-    const jwtPayload: JwtPayload = { email: user.email, roles: user.roles };
+    const jwtPayload: JwtPayload = { id: user.id, email: user.email, roles: user.roles };
     const accessToken = this.jwtService.sign(jwtPayload, { expiresIn: '30d' });
     response.cookie('accessToken', accessToken, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
     response.redirect(process.env.CLIENT_URL);
@@ -59,7 +59,7 @@ export class AuthController {
       user.email,
       `${process.env.SERVER_URL}/auth/verify/${user.verificationLink}`,
     );
-    const jwtPayload: JwtPayload = { email: user.email, roles: user.roles };
+    const jwtPayload: JwtPayload = { id: user.id, email: user.email, roles: user.roles };
     const accessToken = this.jwtService.sign(jwtPayload, { expiresIn: '30d' });
     response.cookie('accessToken', accessToken, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
     return user;
@@ -73,7 +73,7 @@ export class AuthController {
     if (user.provider) throw new UnauthorizedException(`Sign in with ${user.provider}, please`);
     const isPasswordMatch = bcrypt.compareSync(password, user.passwordHash);
     if (!isPasswordMatch) throw new UnauthorizedException('Wrong password');
-    const jwtPayload: JwtPayload = { email: user.email, roles: user.roles };
+    const jwtPayload: JwtPayload = { id: user.id, email: user.email, roles: user.roles };
     const accessToken = this.jwtService.sign(jwtPayload, { expiresIn: '30d' });
     response.cookie('accessToken', accessToken, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
     return user;
@@ -95,7 +95,7 @@ export class AuthController {
 
   @UseGuards(JwtGuard)
   @Get('me')
-  async me(@DecodedUser() { email }: JwtDecodedPayload): Promise<User> {
-    return await this.userService.findOneByEmail(email);
+  async me(@DecodedUser() { id }: JwtDecodedPayload): Promise<User> {
+    return await this.userService.findOne(id);
   }
 }
