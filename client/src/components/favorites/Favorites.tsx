@@ -1,3 +1,9 @@
+import { Container, Title } from '@mantine/core';
+
 export default function Favorites() {
-  return <div>Favorites</div>;
+  return (
+    <Container size='xl'>
+      <Title>Favorites</Title>
+    </Container>
+  );
 }

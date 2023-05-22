@@ -1,3 +1,9 @@
+import { Container, Title } from '@mantine/core';
+
 export default function Catalog() {
-  return <div>Catalog</div>;
+  return (
+    <Container size='xl'>
+      <Title>Catalog</Title>
+    </Container>
+  );
 }

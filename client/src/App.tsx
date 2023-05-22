@@ -1,7 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import { useAuth } from './lib/auth/useAuth';
-import { Auth, Cart, Catalog, Compared, Dashboard, Favorites, Home, NotFound, Orders, Products } from './components';
+import {
+  Auth,
+  Cart,
+  Catalog,
+  Compared,
+  Dashboard,
+  Favorites,
+  Home,
+  NotFound,
+  Orders,
+  Products,
+  Profile,
+} from './components';
 
 function App() {
   const { me } = useAuth();
@@ -18,6 +30,7 @@ function App() {
             <Route path='favorites' element={<Favorites />} />
             <Route path='compared' element={<Compared />} />
             <Route path='orders' element={<Orders />} />
+            <Route path='profile' element={<Profile />} />
           </>
         )}
         {isAdmin && (

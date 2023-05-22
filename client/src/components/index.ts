@@ -8,5 +8,6 @@ import Favorites from './favorites/Favorites';
 import Home from './home/Home';
 import NotFound from './notFound/NotFound';
 import Orders from './orders/Orders';
+import Profile from './profile/Profile';
 
-export { Products, Dashboard, Auth, Cart, Catalog, Home, NotFound, Compared, Favorites, Orders };
+export { Products, Dashboard, Auth, Cart, Catalog, Home, NotFound, Compared, Favorites, Orders, Profile };

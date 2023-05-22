@@ -1,3 +1,9 @@
+import { Container, Title } from '@mantine/core';
+
 export default function Compared() {
-  return <div>Compared</div>;
+  return (
+    <Container size='xl'>
+      <Title>Compared</Title>
+    </Container>
+  );
 }
