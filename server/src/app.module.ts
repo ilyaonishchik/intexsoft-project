@@ -44,7 +44,7 @@ import { OrderItemModule } from './order-item/order-item.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      // synchronize: true,
+      synchronize: true,
     }),
     AuthModule.forRoot(),
     UserModule,

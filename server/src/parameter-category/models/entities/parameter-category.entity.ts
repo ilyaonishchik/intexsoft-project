@@ -1,7 +1,7 @@
 import { Parameter } from 'src/parameter/models/entities/parameter.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('parameter-category')
+@Entity('parameter_category')
 export class ParameterCategory {
   @PrimaryGeneratedColumn('increment')
   id: number;
