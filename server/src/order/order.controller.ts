@@ -1,17 +1,17 @@
-import { Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { Order } from './models/entities/order.entity';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { DecodedUser } from 'src/auth/decorators/decoded-user.decorator';
 import { JwtDecodedPayload } from 'src/auth/models/payloads/jwt-decoded.payload';
+import { CreateOrderDto } from './models/dto/create-order.dto';
 
-@Controller('order')
+@Controller('orders')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
   @UseGuards(JwtGuard)
-  create(@DecodedUser() { id }: JwtDecodedPayload): Promise<Order> {
-    return this.orderService.create(id);
+  create(@DecodedUser() { id }: JwtDecodedPayload, @Body() dto: CreateOrderDto): Promise<string> {
+    return this.orderService.create(id, dto);
   }
 }

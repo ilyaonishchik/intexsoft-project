@@ -1,4 +1,4 @@
-import { Button, Container, Stack } from '@mantine/core';
+import { Button, Container, Stack, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 import CreateProductModal from './createProductModal/CreateProductModal';
@@ -8,8 +8,9 @@ export default function Products() {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <Container size='xl' py='xl'>
+    <Container size='xl'>
       <Stack>
+        <Title>Products</Title>
         <Button leftIcon={<IconPlus />} sx={{ alignSelf: 'end' }} onClick={open}>
           Create product
         </Button>

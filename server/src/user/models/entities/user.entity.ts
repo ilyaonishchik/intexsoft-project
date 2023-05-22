@@ -4,10 +4,13 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from 'src/role/models/entities/role.entity';
+import { Order } from 'src/order/models/entities/order.entity';
+import { Address } from 'src/address/models/entities/address.entity';
 
 @Entity('user')
 export class User {
@@ -54,4 +57,10 @@ export class User {
     inverseJoinColumn: { name: 'roleId' },
   })
   roles: Role[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
+
+  @OneToMany(() => Address, (address) => address.user)
+  addresses: Address[];
 }

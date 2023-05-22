@@ -1,3 +1,4 @@
 export class CreatePaymentDto {
-  value: string;
+  orderId: number;
+  value: number;
 }

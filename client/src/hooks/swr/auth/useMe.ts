@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { User } from '../../types';
+import { User } from '../../../types';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url, { credentials: 'include' });

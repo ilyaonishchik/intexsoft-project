@@ -1,9 +1,9 @@
 import { Group, Table as MantineTable, Pagination, Select, Stack, Text } from '@mantine/core';
 import { useProducts } from '../../../../hooks/swr/product/useProducts';
 import { Loading, Error } from '../../../common';
-import { useCustomMediaQuery } from '../../../../hooks/useCustomMediaQuery';
-import { usePagination } from '../../../../hooks/usePagination';
-import { useSorting } from '../../../../hooks/useSorting';
+import { useCustomMediaQuery } from '../../../../hooks/custom/useCustomMediaQuery';
+import { usePagination } from '../../../../hooks/custom/usePagination';
+import { useSorting } from '../../../../hooks/custom/useSorting';
 import TableItem from './TableItem';
 
 export default function Table() {

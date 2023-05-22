@@ -10,10 +10,11 @@ import {
   IconHeart,
   IconLayoutDashboard,
   IconLogout,
+  IconReceipt2,
   IconShoppingCart,
   IconUserShield,
 } from '@tabler/icons-react';
-import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
 import { useAuth } from '../../lib/auth/useAuth';
 
 export default function Nav() {
@@ -75,6 +76,7 @@ export default function Nav() {
             <NavLink label='Cart' icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart' />
             <NavLink label='Favorites' icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
             <NavLink label='Compared' icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
+            <NavLink label='Orders' icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
             <Menu.Divider />
             <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut}>
               Sign out

@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { NestError, SignInDto, SignUpDto, User } from '../../types';
-import { useMe } from '../../hooks/swr/useMe';
+import { useMe } from '../../hooks/swr/auth/useMe';
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [me, setMe] = useState<User | null>(null);

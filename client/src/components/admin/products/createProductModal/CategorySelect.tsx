@@ -1,7 +1,7 @@
 import { UseFormReturnType } from '@mantine/form';
 import { Select } from '@mantine/core';
 import { FormValues } from './CreateProductModal';
-import { useCategories } from '../../../../hooks/swr/useCategories';
+import { useCategories } from '../../../../hooks/swr/category/useCategories';
 import { Loading, Error } from '../../../common';
 
 type Props = {

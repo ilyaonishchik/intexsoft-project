@@ -1,6 +1,7 @@
 import { Button, Divider, Group, Paper, Stack, Text, TextInput } from '@mantine/core';
 import { Cart } from '../../types';
-import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
+import Checkout from './Checkout';
 
 type Props = {
   cart: Cart;
@@ -33,9 +34,7 @@ export default function Summary({ cart }: Props) {
             Apply
           </Button>
         </Group>
-        <Button size='lg' variant='gradient' gradient={{ from: 'cyan.7', to: 'cyan.3' }}>
-          Checkout
-        </Button>
+        <Checkout />
       </Stack>
     </Paper>
   );

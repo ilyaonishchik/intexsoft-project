@@ -3,7 +3,7 @@ import { IconTrash } from '@tabler/icons-react';
 import { CartItem } from '../../../types';
 import Quantity from './Quantity';
 import { useRemoveFromCart } from '../../../hooks/swr/cart';
-import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../../hooks/custom/useCustomMediaQuery';
 
 type Props = {
   cartItem: CartItem;

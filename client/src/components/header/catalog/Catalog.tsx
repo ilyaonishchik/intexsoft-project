@@ -1,7 +1,7 @@
 import { ActionIcon, Box, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMenu2, IconX } from '@tabler/icons-react';
-import { useCustomMediaQuery } from '../../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../../hooks/custom/useCustomMediaQuery';
 import Modal from './Modal';
 
 export default function Catalog() {

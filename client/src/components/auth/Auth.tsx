@@ -1,5 +1,5 @@
 import { Center, Divider, Paper, Stack, Text } from '@mantine/core';
-import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
 import GoogleButton from './GoogleButton';
 import Form from './Form';
 

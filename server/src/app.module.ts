@@ -20,6 +20,7 @@ import { CartItemModule } from './cart-item/cart-item.module';
 import { PaymentModule } from './payment/payment.module';
 import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './order-item/order-item.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -44,7 +45,7 @@ import { OrderItemModule } from './order-item/order-item.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      // synchronize: true,
     }),
     AuthModule.forRoot(),
     UserModule,
@@ -60,6 +61,7 @@ import { OrderItemModule } from './order-item/order-item.module';
     PaymentModule,
     OrderModule,
     OrderItemModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],

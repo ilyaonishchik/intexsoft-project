@@ -7,5 +7,6 @@ import Compared from './compared/Compared';
 import Favorites from './favorites/Favorites';
 import Home from './home/Home';
 import NotFound from './notFound/NotFound';
+import Orders from './orders/Orders';
 
-export { Products, Dashboard, Auth, Cart, Catalog, Home, NotFound, Compared, Favorites };
+export { Products, Dashboard, Auth, Cart, Catalog, Home, NotFound, Compared, Favorites, Orders };

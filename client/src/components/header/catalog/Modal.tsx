@@ -1,6 +1,6 @@
 import { Modal as MantineModal, ScrollArea, SimpleGrid } from '@mantine/core';
 import { Loading, Error } from '../../common';
-import { useCategories } from '../../../hooks/swr/useCategories';
+import { useCategories } from '../../../hooks/swr/category/useCategories';
 import ModalItem from './ModalItem';
 
 type Props = {

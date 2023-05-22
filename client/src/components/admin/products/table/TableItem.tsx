@@ -2,7 +2,7 @@ import { Menu } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
 import { Product } from '../../../../types';
-import { useCustomMediaQuery } from '../../../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../../../hooks/custom/useCustomMediaQuery';
 import { useDeleteProduct } from '../../../../hooks/swr/product/useDeleteProduct';
 
 type Props = {

@@ -1,9 +1,9 @@
 import { Container, Title } from '@mantine/core';
 
-export default function Dashboard() {
+export default function Orders() {
   return (
     <Container size='xl'>
-      <Title>Dashboard</Title>
+      <Title>Orders</Title>
     </Container>
   );
 }

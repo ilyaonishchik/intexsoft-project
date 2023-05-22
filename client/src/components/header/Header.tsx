@@ -3,7 +3,7 @@ import Search from './Search';
 import Nav from './Nav';
 import Logo from './Logo';
 import Catalog from './catalog/Catalog';
-import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
 
 export default function Header() {
   const smallerThanXS = useCustomMediaQuery('smaller', 'xs');

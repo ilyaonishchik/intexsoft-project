@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { ActionIcon, Button, Container, Drawer, Group, SegmentedControl, Stack } from '@mantine/core';
 import { IconToggleLeft } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { useCustomMediaQuery } from '../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../hooks/custom/useCustomMediaQuery';
 
 export default function AdminLayout() {
   const navigate = useNavigate();

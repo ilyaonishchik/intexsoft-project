@@ -14,12 +14,12 @@ export class OrderItemService {
     private readonly productService: ProductService,
   ) {}
 
-  async create({ orderId, productId }: CreateOrderItemDto): Promise<OrderItem> {
+  async create({ orderId, productId, quantity }: CreateOrderItemDto): Promise<OrderItem> {
     const order = await this.orderService.findOne(orderId);
     if (!order) throw new NotFoundException(`Order with id ${orderId} not found`);
     const product = await this.productService.findOne(productId);
     if (!product) throw new NotFoundException(`Product with id ${orderId} not found`);
-    const orderItem = this.orderItemRepository.create({ order, product });
+    const orderItem = this.orderItemRepository.create({ order, product, quantity });
     return this.orderItemRepository.save(orderItem);
   }
 }

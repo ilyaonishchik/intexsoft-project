@@ -1,9 +1,9 @@
-import { Container, Group, Stack, Title } from '@mantine/core';
+import { Container, Group, Stack, Title, Text } from '@mantine/core';
 import { useCart } from '../../hooks/swr/cart/useCart';
 import { Error, Loading } from '../common';
 import CartItem from './cartItem/CartItem';
 import Summary from './Summary';
-import { useCustomMediaQuery } from '../../hooks/useCustomMediaQuery';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
 
 export default function Cart() {
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
@@ -12,19 +12,27 @@ export default function Cart() {
   if (!cart) return <Loading />;
   if (error) return <Error />;
 
+  const isEmpty = !cart.items.length;
+
   return (
     <Container size='xl'>
       <Stack>
         <Title>Cart</Title>
-        {!largerThanSM && <Summary cart={cart} />}
-        <Group sx={{ flexWrap: 'nowrap' }}>
-          <Stack sx={{ flex: '1 auto' }}>
-            {cart.items?.map(cartItem => (
-              <CartItem key={cartItem.id} cartItem={cartItem} />
-            ))}
-          </Stack>
-          {largerThanSM && <Summary cart={cart} />}
-        </Group>
+        {isEmpty ? (
+          <Text>Your cart is empty</Text>
+        ) : (
+          <>
+            {!largerThanSM && <Summary cart={cart} />}
+            <Group sx={{ flexWrap: 'nowrap' }}>
+              <Stack sx={{ flex: '1 auto', alignSelf: 'start' }}>
+                {cart.items?.map(cartItem => (
+                  <CartItem key={cartItem.id} cartItem={cartItem} />
+                ))}
+              </Stack>
+              {largerThanSM && <Summary cart={cart} />}
+            </Group>
+          </>
+        )}
       </Stack>
     </Container>
   );

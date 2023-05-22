@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { Category } from '../../types';
+import { Category } from '../../../types';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
