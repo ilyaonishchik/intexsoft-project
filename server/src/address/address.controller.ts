@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { Address } from './models/entities/address.entity';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
@@ -14,5 +14,11 @@ export class AddressController {
   @UseGuards(JwtGuard)
   create(@DecodedUser() { id }: JwtDecodedPayload, @Body() dto: CreateAddressDto): Promise<Address> {
     return this.addressService.create(id, dto);
+  }
+
+  @Get()
+  @UseGuards(JwtGuard)
+  findAll(@DecodedUser() { id }: JwtDecodedPayload): Promise<Address[]> {
+    return this.addressService.findAll(id);
   }
 }

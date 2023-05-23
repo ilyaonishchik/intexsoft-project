@@ -1,3 +1,4 @@
+import { Address } from '.';
 import { Role } from './Role';
 
 export type User = {
@@ -14,4 +15,5 @@ export type User = {
   verified: boolean;
   banned: boolean;
   roles: Role[];
+  addresses?: Address[];
 };

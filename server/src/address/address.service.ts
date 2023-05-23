@@ -14,8 +14,11 @@ export class AddressService {
 
   async create(userId: number, dto: CreateAddressDto): Promise<Address> {
     const user = await this.userService.findOne(userId);
-    if (!user) throw new NotFoundException(`User with id ${userId} not found`);
     return this.addressRepository.save({ user, ...dto });
+  }
+
+  async findAll(userId: number): Promise<Address[]> {
+    return this.addressRepository.find({ where: { user: { id: userId } } });
   }
 
   async findOne(id: number): Promise<Address> {

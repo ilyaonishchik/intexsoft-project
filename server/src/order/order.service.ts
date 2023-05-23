@@ -19,11 +19,11 @@ export class OrderService {
     private readonly addressService: AddressService,
   ) {}
 
-  async create(id: number, { addressId }: CreateOrderDto): Promise<string> {
+  async create(id: number, { name, surname, addressId }: CreateOrderDto): Promise<string> {
     const cart = await this.cartService.findOneByUserId(id);
     const address = await this.addressService.findOne(addressId);
     const amount = cart.items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-    const order = await this.orderRepository.save({ amount, address });
+    const order = await this.orderRepository.save({ amount, name, surname, address });
     cart.items.forEach(async (item) => {
       await this.orderItemService.create({ orderId: order.id, productId: item.product.id, quantity: item.quantity });
     });

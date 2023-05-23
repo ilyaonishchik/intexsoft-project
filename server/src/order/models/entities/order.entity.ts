@@ -26,6 +26,12 @@ export class Order {
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
+  @Column()
+  name: string;
+
+  @Column()
+  surname: string;
+
   @ManyToOne(() => Address, (address) => address.orders)
   address: Address;
 

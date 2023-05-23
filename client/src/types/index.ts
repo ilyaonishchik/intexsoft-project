@@ -12,3 +12,6 @@ export * from './SortingArgs';
 export * from './MessageResponse';
 export * from './Cart';
 export * from './CartItem';
+export * from './Address';
+export * from './Order';
+export * from './OrderItem';
