@@ -2,11 +2,12 @@ import { IPaymentStatus } from '@a2seven/yoo-checkout';
 import { OrderItem } from '.';
 import { Address } from './Address';
 import { User } from './User';
+import { OrderStatus } from './OrderStatus';
 
 export type Order = {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   user?: User;
   name: string;
   surname: string;
@@ -14,4 +15,5 @@ export type Order = {
   items: OrderItem[];
   amount: number;
   paymentStatus: IPaymentStatus;
+  status: OrderStatus;
 };

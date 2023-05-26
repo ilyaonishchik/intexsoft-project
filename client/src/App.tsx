@@ -10,6 +10,7 @@ import {
   Favorites,
   Home,
   NotFound,
+  Order,
   Orders,
   Products,
   Profile,
@@ -30,6 +31,7 @@ function App() {
             <Route path='favorites' element={<Favorites />} />
             <Route path='compared' element={<Compared />} />
             <Route path='orders' element={<Orders />} />
+            <Route path='orders/:id' element={<Order />} />
             <Route path='profile' element={<Profile />} />
           </>
         )}

@@ -11,6 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { OrderStatus } from '../types/order-status.type';
 
 @Entity('order')
 export class Order {
@@ -43,4 +44,7 @@ export class Order {
 
   @Column({ default: 'pending' })
   paymentStatus: IPaymentStatus;
+
+  @Column({ default: 'pending' })
+  status: OrderStatus;
 }

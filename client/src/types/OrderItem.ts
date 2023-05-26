@@ -5,4 +5,5 @@ export type OrderItem = {
   order?: Order;
   product?: Product;
   quantity: number;
+  price: number;
 };

@@ -19,7 +19,6 @@ export class OrderItemService {
     if (!order) throw new NotFoundException(`Order with id ${orderId} not found`);
     const product = await this.productService.findOne(productId);
     if (!product) throw new NotFoundException(`Product with id ${orderId} not found`);
-    const orderItem = this.orderItemRepository.create({ order, product, quantity });
-    return this.orderItemRepository.save(orderItem);
+    return this.orderItemRepository.save({ order, product, quantity, price: product.price });
   }
 }
