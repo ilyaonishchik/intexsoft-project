@@ -5,6 +5,7 @@ import { User } from './models/entities/user.entity';
 import { RoleService } from 'src/role/role.service';
 import { CreateUserDto } from './models/dto/create-user.dto';
 import { CartService } from 'src/cart/cart.service';
+import { UpdateUserDto } from './models/dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -31,12 +32,22 @@ export class UserService {
     return user;
   }
 
-  findOneByEmail(email: string): Promise<User> {
-    return this.userRepository.findOne({ where: { email }, relations: { roles: true } });
+  async findOneByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email }, relations: { roles: true } });
+    if (!user) throw new NotFoundException(`User with email ${email} not found`);
+    return user;
   }
 
-  findOneByVerificationLink(verificationLink: string): Promise<User> {
-    return this.userRepository.findOneBy({ verificationLink });
+  async findOneByVerificationLink(verificationLink: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ verificationLink });
+    if (!user) throw new NotFoundException(`User with verification link ${verificationLink} not found`);
+    return user;
+  }
+
+  async update(id: number, dto: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) throw new NotFoundException(`User with id ${id} not found`);
+    return this.userRepository.save({ ...user, ...dto });
   }
 
   async verify(id: number): Promise<User> {

@@ -1,10 +1,15 @@
-import { Container, Stack, Title } from '@mantine/core';
+import { Container, Stack } from '@mantine/core';
+import General from './general/General';
+import Addresses from './addresses/Addresses';
 
 export default function Profile() {
   return (
-    <Container size='xl'>
+    <Container size='xl' mt='xl'>
       <Stack>
-        <Title>Profile</Title>
+        <Stack>
+          <General />
+          <Addresses />
+        </Stack>
       </Stack>
     </Container>
   );

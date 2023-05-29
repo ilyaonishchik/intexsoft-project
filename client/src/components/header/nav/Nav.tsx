@@ -3,6 +3,7 @@ import { Avatar, Button, Menu, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import {
+  IconBell,
   IconChartBar,
   IconChevronDown,
   IconChevronUp,
@@ -11,18 +12,22 @@ import {
   IconLayoutDashboard,
   IconLogout,
   IconReceipt2,
-  IconShoppingCart,
+  IconSettings,
   IconUserCircle,
   IconUserShield,
 } from '@tabler/icons-react';
-import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
-import { useAuth } from '../../lib/auth/useAuth';
+import { useCustomMediaQuery } from '../../../hooks/custom/useCustomMediaQuery';
+import { useAuth } from '../../../lib/auth/useAuth';
+import CartLink from './CartLink';
 
 export default function Nav() {
-  const [opened, { toggle }] = useDisclosure(false);
   const smallerThanSM = useCustomMediaQuery('smaller', 'sm');
+
+  const [opened, { toggle }] = useDisclosure(false);
+
   const { me, signOut } = useAuth();
   const isAdmin = !!me?.roles.find(role => role.name === 'admin');
+
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -74,11 +79,13 @@ export default function Nav() {
                 <Menu.Divider />
               </>
             )}
-            <NavLink label='Cart' icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart' />
+            <CartLink />
             <NavLink label='Favorites' icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
             <NavLink label='Compared' icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
             <NavLink label='Orders' icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
             <NavLink label='Profile' icon={<IconUserCircle stroke='1' />} component={Link} to='/profile' />
+            <NavLink label='Notifications' icon={<IconBell stroke='1' />} component={Link} to='/notifications' />
+            <NavLink label='Settings' icon={<IconSettings stroke='1' />} component={Link} to='/settings' />
             <Menu.Divider />
             <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut}>
               Sign out

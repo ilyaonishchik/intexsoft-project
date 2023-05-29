@@ -8,7 +8,7 @@ import { OrderStatus } from '../../types';
 
 export default function Orders() {
   const { page, setPage, take } = usePagination(1, 20);
-  const [status, setStatus] = useState<OrderStatus>('pending');
+  const [status, setStatus] = useState<OrderStatus>('succeeded');
 
   const { error, data } = useOrders({ take: 10, status });
   if (!data) return <Loading />;
