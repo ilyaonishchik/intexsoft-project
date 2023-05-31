@@ -1,5 +1,5 @@
+import { useTranslation } from 'react-i18next';
 import { Table } from '@mantine/core';
-import { v4 } from 'uuid';
 import { Address } from '../../types';
 
 type Props = {
@@ -7,18 +7,38 @@ type Props = {
 };
 
 export default function AddressTable({ address }: Props) {
-  const rows = Object.entries(address)
-    .filter(item => item[0] !== 'id')
-    .map(([key, value]) => (
-      <tr key={v4()}>
-        <th>{key.charAt(0).toUpperCase() + key.slice(1)}</th>
-        <td>{value || '-'}</td>
-      </tr>
-    ));
+  const { t } = useTranslation();
+
+  const { country, city, house, street, zip, apartment } = address;
 
   return (
     <Table>
-      <tbody>{rows}</tbody>
+      <tbody>
+        <tr>
+          <th>{t('country')}</th>
+          <td>{country}</td>
+        </tr>
+        <tr>
+          <th>{t('city')}</th>
+          <td>{city}</td>
+        </tr>
+        <tr>
+          <th>{t('zip')}</th>
+          <td>{zip}</td>
+        </tr>
+        <tr>
+          <th>{t('street')}</th>
+          <td>{street}</td>
+        </tr>
+        <tr>
+          <th>{t('house')}</th>
+          <td>{house}</td>
+        </tr>
+        <tr>
+          <th>{t('apartment')}</th>
+          <td>{apartment}</td>
+        </tr>
+      </tbody>
     </Table>
   );
 }

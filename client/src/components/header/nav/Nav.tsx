@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Avatar, Button, Menu, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
@@ -21,6 +22,8 @@ import { useAuth } from '../../../lib/auth/useAuth';
 import CartLink from './CartLink';
 
 export default function Nav() {
+  const { t } = useTranslation();
+
   const smallerThanSM = useCustomMediaQuery('smaller', 'sm');
 
   const [opened, { toggle }] = useDisclosure(false);
@@ -62,15 +65,15 @@ export default function Nav() {
           <Menu.Dropdown>
             {isAdmin && (
               <>
-                <NavLink label='Admin' icon={<IconUserShield stroke='1' />}>
+                <NavLink label={t('admin')} icon={<IconUserShield stroke='1' />}>
                   <NavLink
-                    label='Dashboard'
+                    label={t('dashboard')}
                     icon={<IconLayoutDashboard stroke='1' />}
                     component={Link}
                     to='/admin/dashboard'
                   />
                   <NavLink
-                    label='Products'
+                    label={t('products')}
                     icon={<IconDeviceMobile stroke='1' />}
                     component={Link}
                     to='/admin/products'
@@ -80,15 +83,15 @@ export default function Nav() {
               </>
             )}
             <CartLink />
-            <NavLink label='Favorites' icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
-            <NavLink label='Compared' icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
-            <NavLink label='Orders' icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
-            <NavLink label='Profile' icon={<IconUserCircle stroke='1' />} component={Link} to='/profile' />
-            <NavLink label='Notifications' icon={<IconBell stroke='1' />} component={Link} to='/notifications' />
-            <NavLink label='Settings' icon={<IconSettings stroke='1' />} component={Link} to='/settings' />
+            <NavLink label={t('favorites')} icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
+            <NavLink label={t('compared')} icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
+            <NavLink label={t('orders')} icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
+            <NavLink label={t('profile')} icon={<IconUserCircle stroke='1' />} component={Link} to='/profile' />
+            <NavLink label={t('notifications')} icon={<IconBell stroke='1' />} component={Link} to='/notifications' />
+            <NavLink label={t('settings')} icon={<IconSettings stroke='1' />} component={Link} to='/settings' />
             <Menu.Divider />
-            <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut}>
-              Sign out
+            <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut} color='red'>
+              {t('signOut')}
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>

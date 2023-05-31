@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button, Group, SimpleGrid, Stack, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
@@ -7,6 +8,8 @@ import Address from './Address';
 import CreateAddressModal from './CreateAddressModal';
 
 export default function Addresses() {
+  const { t } = useTranslation();
+
   const { error, data: addresses } = useAddresses();
 
   const [opened, { open, close }] = useDisclosure();
@@ -16,10 +19,10 @@ export default function Addresses() {
 
   return (
     <Stack>
-      <Title order={2}>Addresses</Title>
+      <Title order={2}>{t('addresses')}</Title>
       <Group>
         <Button leftIcon={<IconPlus />} onClick={open}>
-          Add new address
+          {t('addNewAddress')}
         </Button>
         <CreateAddressModal opened={opened} close={close} />
       </Group>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button, Modal, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -9,6 +10,8 @@ type Props = {
 };
 
 export default function CreateAddressModal({ opened, close }: Props) {
+  const { t } = useTranslation();
+
   const form = useForm({
     initialValues: {
       country: '',
@@ -30,17 +33,17 @@ export default function CreateAddressModal({ opened, close }: Props) {
   });
 
   return (
-    <Modal opened={opened} onClose={close} title='Add new address'>
+    <Modal opened={opened} onClose={close} title={t('addNewAddress')}>
       <form onSubmit={handleSubmit}>
         <Stack spacing='xs'>
-          <TextInput label='Country' required {...form.getInputProps('country')} />
-          <TextInput label='City' required {...form.getInputProps('city')} />
-          <TextInput label='Zip' required {...form.getInputProps('zip')} />
-          <TextInput label='Street' required {...form.getInputProps('street')} />
-          <TextInput label='House' required {...form.getInputProps('house')} />
-          <TextInput label='Apartment' {...form.getInputProps('apartment')} />
+          <TextInput label={t('country')} required {...form.getInputProps('country')} />
+          <TextInput label={t('city')} required {...form.getInputProps('city')} />
+          <TextInput label={t('zip')} required {...form.getInputProps('zip')} />
+          <TextInput label={t('street')} required {...form.getInputProps('street')} />
+          <TextInput label={t('house')} required {...form.getInputProps('house')} />
+          <TextInput label={t('apartment')} {...form.getInputProps('apartment')} />
           <Button type='submit' loading={isMutating} sx={{ alignSelf: 'end' }}>
-            Add
+            {t('add')}
           </Button>
         </Stack>
       </form>

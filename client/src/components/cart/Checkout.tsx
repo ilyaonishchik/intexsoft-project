@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button, Modal, ScrollArea, Stack, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { isNotEmpty, useForm } from '@mantine/form';
@@ -14,6 +15,8 @@ export type FormValues = {
 };
 
 export default function Checkout() {
+  const { t } = useTranslation();
+
   const [opened, { open, close }] = useDisclosure(false);
 
   const { trigger, isMutating } = useCreateOrder();
@@ -44,16 +47,16 @@ export default function Checkout() {
   return (
     <>
       <Button onClick={open} size='lg' variant='gradient' gradient={{ from: 'cyan.7', to: 'cyan.3' }}>
-        Checkout
+        {t('checkout')}
       </Button>
-      <Modal opened={opened} onClose={close} title='Checkout' scrollAreaComponent={ScrollArea.Autosize}>
+      <Modal opened={opened} onClose={close} title={t('checkout')} scrollAreaComponent={ScrollArea.Autosize}>
         <form onSubmit={handleSubmit}>
           <Stack>
-            <TextInput label='Name' withAsterisk {...form.getInputProps('name')} />
-            <TextInput label='Surname' withAsterisk {...form.getInputProps('surname')} />
+            <TextInput label={t('name')} withAsterisk {...form.getInputProps('name')} />
+            <TextInput label={t('surname')} withAsterisk {...form.getInputProps('surname')} />
             <AddressSelect form={form} />
             <Button loading={isMutating} type='submit'>
-              Checkout
+              {t('checkout')}
             </Button>
           </Stack>
         </form>

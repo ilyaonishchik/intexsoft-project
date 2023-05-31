@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Modal as MantineModal, ScrollArea, SimpleGrid } from '@mantine/core';
 import { Loading, Error } from '../../common';
 import { useCategories } from '../../../hooks/swr/category/useCategories';
@@ -9,13 +10,20 @@ type Props = {
 };
 
 export default function Modal({ opened, close }: Props) {
+  const { t } = useTranslation();
   const { data: categories, error, isLoading } = useCategories();
 
   if (isLoading) return <Loading />;
   if (error) return <Error />;
 
   return (
-    <MantineModal opened={opened} onClose={close} scrollAreaComponent={ScrollArea.Autosize} title='Catalog' size='xl'>
+    <MantineModal
+      opened={opened}
+      onClose={close}
+      scrollAreaComponent={ScrollArea.Autosize}
+      title={t('catalog')}
+      size='xl'
+    >
       <SimpleGrid
         cols={1}
         breakpoints={[

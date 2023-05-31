@@ -12,8 +12,10 @@ import {
   NotFound,
   Order,
   Orders,
+  Product,
   Products,
   Profile,
+  Settings,
 } from './components';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path='/' element={<Home />} />
         <Route path='catalog' element={<Catalog />} />
+        <Route path='products/:id' element={<Product />} />
+        <Route path='settings' element={<Settings />} />
         {me && (
           <>
             <Route path='cart' element={<Cart />} />

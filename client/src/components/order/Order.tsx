@@ -27,8 +27,8 @@ export default function Order() {
           <Stack>
             <Items items={order.items} />
             <SimpleGrid cols={3}>
-              <Address address={address!} />
               <Bill amount={amount} />
+              <Address address={address!} />
               <Recipient name={name} surname={surname} />
             </SimpleGrid>
           </Stack>
@@ -36,8 +36,8 @@ export default function Order() {
           <Stack>
             <Items items={items} />
             <Bill amount={amount} />
-            <Recipient name={name} surname={surname} />
             <Address address={address!} />
+            <Recipient name={name} surname={surname} />
           </Stack>
         )}
       </Stack>

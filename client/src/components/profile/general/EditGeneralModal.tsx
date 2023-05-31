@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button, Modal, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 export default function EditGeneralModal({ me, opened, close }: Props) {
+  const { t } = useTranslation();
+
   const form = useForm({
     initialValues: {
       name: me.name,
@@ -28,13 +31,13 @@ export default function EditGeneralModal({ me, opened, close }: Props) {
   });
 
   return (
-    <Modal opened={opened} onClose={close} title='Edit general info'>
+    <Modal opened={opened} onClose={close} title={t('editGeneralInfo')}>
       <form onSubmit={handleSubmit}>
         <Stack spacing='xs'>
-          <TextInput label='Name' required {...form.getInputProps('name')} />
-          <TextInput label='Surname' required {...form.getInputProps('surname')} />
+          <TextInput label={t('name')} required {...form.getInputProps('name')} />
+          <TextInput label={t('surname')} required {...form.getInputProps('surname')} />
           <Button type='submit' loading={isMutating} sx={{ alignSelf: 'end' }}>
-            Save
+            {t('save')}
           </Button>
         </Stack>
       </form>

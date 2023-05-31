@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Container, Group, Stack, Title, Text } from '@mantine/core';
 import { useCart } from '../../hooks/swr/cart/useCart';
 import { Error, Loading } from '../common';
@@ -6,6 +7,8 @@ import Summary from './Summary';
 import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
 
 export default function Cart() {
+  const { t } = useTranslation();
+
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
 
   const { error, data: cart } = useCart();
@@ -17,9 +20,9 @@ export default function Cart() {
   return (
     <Container size='xl'>
       <Stack>
-        <Title>Cart</Title>
+        <Title>{t('cart')}</Title>
         {isEmpty ? (
-          <Text>Your cart is empty</Text>
+          <Text>{t('yourCartIsEmpty')}</Text>
         ) : (
           <>
             {!largerThanSM && <Summary cart={cart} />}
