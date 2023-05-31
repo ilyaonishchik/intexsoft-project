@@ -20,7 +20,7 @@ export default function Product() {
     <Container size='xl'>
       <Stack>
         <Title>{name}</Title>
-        <Group>
+        <Group position='apart'>
           <Carousel productImages={images} />
           <General />
           <Pricing price={price} />
