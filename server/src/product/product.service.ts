@@ -38,8 +38,13 @@ export class ProductService {
     });
   }
 
-  findOne(id: number): Promise<Product> {
-    return this.productRepository.findOne({ where: { id }, relations: { category: true, images: { image: true } } });
+  async findOne(id: number): Promise<Product> {
+    const product = await this.productRepository.findOne({
+      where: { id },
+      relations: { category: true, images: { image: true } },
+    });
+    if (!product) throw new NotFoundException(`Product with id ${id} not found`);
+    return product;
   }
 
   async delete(id: number): Promise<MessageResponse> {

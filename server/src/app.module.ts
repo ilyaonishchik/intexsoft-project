@@ -21,6 +21,7 @@ import { PaymentModule } from './payment/payment.module';
 import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { AddressModule } from './address/address.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { AddressModule } from './address/address.module';
     OrderModule,
     OrderItemModule,
     AddressModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

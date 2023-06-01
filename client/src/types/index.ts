@@ -16,3 +16,4 @@ export * from './Address';
 export * from './Order';
 export * from './OrderItem';
 export * from './OrderStatus';
+export * from './Review';

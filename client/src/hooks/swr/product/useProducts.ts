@@ -3,7 +3,7 @@ import { PaginationArgs, Product, SortingArgs } from '../../../types';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
-  if (!response.ok) throw new Error('An error occurred while fetching products.');
+  if (!response.ok) throw new Error('An error occurred while fetching products');
   return (await response.json()) as [Product[], number];
 };
 

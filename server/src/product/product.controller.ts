@@ -31,8 +31,8 @@ export class ProductController {
 
   @Get()
   findAll(
-    @Query('skip') skip?: number,
-    @Query('take') take?: number,
+    @Query('skip') skip: number,
+    @Query('take') take: number,
     @Query('sortBy') sortBy = 'updatedAt',
     @Query('order') order = OrderEnum.desc,
   ): Promise<[Product[], number]> {

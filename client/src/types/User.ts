@@ -8,8 +8,8 @@ export type User = {
   provider?: string;
   email: string;
   passwordHash?: string;
-  name?: string;
-  surname?: string;
+  name: string;
+  surname: string;
   avatar?: string;
   verificationLink?: string;
   verified: boolean;

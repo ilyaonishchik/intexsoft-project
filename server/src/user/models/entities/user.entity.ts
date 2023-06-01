@@ -11,6 +11,7 @@ import {
 import { Role } from 'src/role/models/entities/role.entity';
 import { Order } from 'src/order/models/entities/order.entity';
 import { Address } from 'src/address/models/entities/address.entity';
+import { Review } from 'src/review/entities/review.entity';
 
 @Entity('user')
 export class User {
@@ -63,4 +64,7 @@ export class User {
 
   @OneToMany(() => Address, (address) => address.user)
   addresses: Address[];
+
+  @OneToMany(() => Review, (review) => review.user)
+  reviews: Review[];
 }

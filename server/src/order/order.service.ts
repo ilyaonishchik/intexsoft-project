@@ -63,4 +63,12 @@ export class OrderService {
     const order = await this.orderRepository.findOne({ where: { id } });
     return this.orderRepository.save({ ...order, ...dto });
   }
+
+  async didUserPurchaseProduct(userId: number, productId: number): Promise<boolean> {
+    const orders = await this.orderRepository.find({
+      where: { user: { id: userId }, items: { product: { id: productId } } },
+    });
+    console.log('here');
+    return;
+  }
 }
