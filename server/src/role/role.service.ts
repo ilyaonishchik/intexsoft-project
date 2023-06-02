@@ -15,12 +15,4 @@ export class RoleService {
   findAll(): Promise<Role[]> {
     return this.roleRepository.find();
   }
-
-  findOne(id: number): Promise<Role> {
-    return this.roleRepository.findOne({ where: { id } });
-  }
-
-  findDefault(): Promise<Role> {
-    return this.roleRepository.findOneBy({ name: 'user' });
-  }
 }

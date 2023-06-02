@@ -1,35 +1,48 @@
-import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { Injectable, Inject, forwardRef, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './models/entities/order.entity';
 import { Repository } from 'typeorm';
 import { CartService } from 'src/cart/cart.service';
-import { OrderItemService } from 'src/order-item/order-item.service';
 import { PaymentService } from 'src/payment/payment.service';
 import { UpdateOrderDto } from './models/dto/update-order.dto';
 import { CreateOrderDto } from './models/dto/create-order.dto';
-import { AddressService } from 'src/address/address.service';
-import { UserService } from 'src/user/user.service';
 import { OrderStatus } from './models/types/order-status.type';
+import { User } from 'src/user/models/entities/user.entity';
+import { Cart } from 'src/cart/entities/cart.entity';
+import { Address } from 'src/address/models/entities/address.entity';
+import { OrderItem } from 'src/order-item/models/entities/order-item.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Order) private readonly orderRepository: Repository<Order>,
     @Inject(forwardRef(() => PaymentService)) private readonly paymentService: PaymentService,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Cart) private readonly cartRepository: Repository<Cart>,
+    @InjectRepository(Address) private readonly addressRepository: Repository<Address>,
+    @InjectRepository(OrderItem) private readonly orderItemRepository: Repository<OrderItem>,
     private readonly cartService: CartService,
-    private readonly orderItemService: OrderItemService,
-    private readonly addressService: AddressService,
-    private readonly userService: UserService,
   ) {}
 
   async create(userId: number, { name, surname, addressId }: CreateOrderDto): Promise<string> {
-    const user = await this.userService.findOne(userId);
-    const cart = await this.cartService.findOneByUserId(user.id);
-    const address = await this.addressService.findOne(addressId);
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) throw new NotFoundException(`User with id ${userId} not found`);
+    const cart = await this.cartRepository.findOne({
+      where: { user: { id: userId } },
+      relations: { items: { product: true } },
+    });
+    if (!cart) throw new NotFoundException(`Cart of user with id ${userId} not found`);
+    const address = await this.addressRepository.findOne({ where: { id: addressId } });
+    if (!address) throw new NotFoundException(`Address with id ${addressId} not found`);
     const amount = cart.items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     const order = await this.orderRepository.save({ user, amount, name, surname, address });
     cart.items.forEach(async (item) => {
-      await this.orderItemService.create({ orderId: order.id, productId: item.product.id, quantity: item.quantity });
+      await this.orderItemRepository.save({
+        order,
+        product: item.product,
+        quantity: item.quantity,
+        price: item.product.price,
+      });
     });
     await this.cartService.clear(cart.id);
     const payment = await this.paymentService.create(order.id, order.amount);
@@ -62,13 +75,5 @@ export class OrderService {
   async update(id: number, dto: UpdateOrderDto): Promise<Order> {
     const order = await this.orderRepository.findOne({ where: { id } });
     return this.orderRepository.save({ ...order, ...dto });
-  }
-
-  async didUserPurchaseProduct(userId: number, productId: number): Promise<boolean> {
-    const orders = await this.orderRepository.find({
-      where: { user: { id: userId }, items: { product: { id: productId } } },
-    });
-    console.log('here');
-    return;
   }
 }

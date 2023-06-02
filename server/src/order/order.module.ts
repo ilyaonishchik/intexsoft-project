@@ -7,16 +7,18 @@ import { CartModule } from 'src/cart/cart.module';
 import { OrderItemModule } from 'src/order-item/order-item.module';
 import { PaymentModule } from 'src/payment/payment.module';
 import { AddressModule } from 'src/address/address.module';
-import { UserModule } from 'src/user/user.module';
+import { User } from 'src/user/models/entities/user.entity';
+import { Cart } from 'src/cart/entities/cart.entity';
+import { Address } from 'src/address/models/entities/address.entity';
+import { OrderItem } from 'src/order-item/models/entities/order-item.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Order]),
+    TypeOrmModule.forFeature([Order, User, Cart, Address, OrderItem]),
     forwardRef(() => PaymentModule),
     CartModule,
     OrderItemModule,
     AddressModule,
-    UserModule,
   ],
   controllers: [OrderController],
   providers: [OrderService],

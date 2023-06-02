@@ -2,23 +2,24 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './models/entities/user.entity';
-import { RoleService } from 'src/role/role.service';
 import { CreateUserDto } from './models/dto/create-user.dto';
-import { CartService } from 'src/cart/cart.service';
 import { UpdateUserDto } from './models/dto/update-user.dto';
+import { Role } from 'src/role/models/entities/role.entity';
+import { Cart } from 'src/cart/entities/cart.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private readonly roleService: RoleService,
-    private readonly cartService: CartService,
+    @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
+    @InjectRepository(Cart) private readonly cartRepository: Repository<Cart>,
   ) {}
 
   async create(dto: CreateUserDto): Promise<User> {
-    const defaultRole = await this.roleService.findDefault();
+    const defaultRole = await this.roleRepository.findOne({ where: { name: 'user' } });
+    if (!defaultRole) throw new NotFoundException(`Role with name user not found`);
     const user = await this.userRepository.save({ ...dto, roles: [defaultRole] });
-    await this.cartService.create(user);
+    await this.cartRepository.save({ user });
     return user;
   }
 

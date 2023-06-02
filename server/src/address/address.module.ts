@@ -3,10 +3,10 @@ import { AddressService } from './address.service';
 import { AddressController } from './address.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Address } from './models/entities/address.entity';
-import { UserModule } from 'src/user/user.module';
+import { User } from 'src/user/models/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Address]), UserModule],
+  imports: [TypeOrmModule.forFeature([Address, User])],
   controllers: [AddressController],
   providers: [AddressService],
   exports: [AddressService],

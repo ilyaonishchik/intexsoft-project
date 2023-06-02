@@ -3,28 +3,28 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
-import { CategoryService } from 'src/category/category.service';
-import { ImageService } from 'src/image/image.service';
-import { ProductImageService } from 'src/product-image/product-image.service';
 import { OrderEnum } from 'src/_common/enums/order.enum';
 import { MessageResponse } from 'src/_common/message.response';
+import { Category } from 'src/category/models/entities/category.entity';
+import { Image } from 'src/image/models/entities/image.entity';
+import { ProductImage } from 'src/product-image/entities/product-image.entity';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(Product) private readonly productRepository: Repository<Product>,
-    private readonly categoryService: CategoryService,
-    private readonly imageService: ImageService,
-    private readonly productImageService: ProductImageService,
+    @InjectRepository(Category) private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(Image) private readonly imageRepository: Repository<Image>,
+    @InjectRepository(ProductImage) private readonly productImageRepository: Repository<ProductImage>,
   ) {}
 
   async create({ categoryId, files, name, price, quantity }: CreateProductDto): Promise<Product> {
-    const category = await this.categoryService.findOne(categoryId);
+    const category = await this.categoryRepository.findOne({ where: { id: categoryId } });
     if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
     const product = await this.productRepository.save({ category, name, price, quantity });
     files.forEach(async (file, index) => {
-      const image = await this.imageService.create({ name: file.filename, alt: name });
-      await this.productImageService.create({ image, product, ordinal: index + 1 });
+      const image = await this.imageRepository.save({ name: file.filename, alt: name });
+      await this.productImageRepository.save({ image, product, ordinal: index + 1 });
     });
     return product;
   }
