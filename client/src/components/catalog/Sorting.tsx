@@ -22,11 +22,12 @@ export default function Sorting({ sortBy, onSortByChange, order, onOrderChange }
           ]}
           value={sortBy}
           onChange={onSortByChange}
+          maw={105}
         />
       </Group>
       <Group>
         <Text>Order:</Text>
-        <Select data={['asc', 'desc']} value={order} onChange={onOrderChange} />
+        <Select data={['asc', 'desc']} value={order} onChange={onOrderChange} maw={85} />
       </Group>
     </Group>
   );

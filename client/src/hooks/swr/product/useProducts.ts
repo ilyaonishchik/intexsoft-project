@@ -11,7 +11,7 @@ const fetcher = async (url: string) => {
 type Args = {
   pagination?: PaginationArgs;
   sorting?: SortingArgs;
-  categoryId?: string;
+  categoryName?: string;
 };
 
 export const useProducts = (args?: Args) => {

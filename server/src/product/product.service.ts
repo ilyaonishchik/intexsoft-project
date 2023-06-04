@@ -34,10 +34,10 @@ export class ProductService {
     take: number,
     sortBy: string,
     order: OrderEnum,
-    categoryId: number,
+    categoryName: string,
   ): Promise<[Product[], number]> {
     return this.productRepository.findAndCount({
-      where: { category: { id: categoryId } },
+      where: { category: { name: categoryName } },
       relations: { category: true, images: { image: true } },
       skip,
       take,

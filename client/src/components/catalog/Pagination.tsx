@@ -14,7 +14,7 @@ export default function Pagination({ total, page, onPageChange, take, onTakeChan
       <MantinePagination total={total} value={page} onChange={onPageChange} />
       <Group>
         <Text>Show:</Text>
-        <Select data={['3', '6', '9']} value={String(take)} onChange={onTakeChange} maw={70} />
+        <Select data={['9']} value={String(take)} onChange={onTakeChange} maw={70} />
       </Group>
     </Group>
   );

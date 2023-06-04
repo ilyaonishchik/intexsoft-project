@@ -37,9 +37,9 @@ export default function ModalItem({ category, close }: Props) {
   const [opened, { toggle }] = useDisclosure(false);
   const navigate = useNavigate();
 
-  const handleNavigate = (id: number) => {
+  const handleNavigate = (categoryName: string) => {
     close();
-    navigate(`/catalog?categoryId=${id}`);
+    navigate(`/catalog/${categoryName.toLowerCase()}`);
   };
 
   return (
@@ -52,7 +52,7 @@ export default function ModalItem({ category, close }: Props) {
         <List listStyleType='none'>
           {category.children?.map(child => (
             <List.Item key={child.id} className={classes.li}>
-              <Anchor className={classes.anchor} onClick={() => handleNavigate(child.id)}>
+              <Anchor className={classes.anchor} onClick={() => handleNavigate(child.name)}>
                 {child.name}
               </Anchor>
             </List.Item>
