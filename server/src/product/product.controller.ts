@@ -35,8 +35,9 @@ export class ProductController {
     @Query('take') take: number,
     @Query('sortBy') sortBy = 'updatedAt',
     @Query('order') order = OrderEnum.desc,
+    @Query('categoryId') categoryId: number,
   ): Promise<[Product[], number]> {
-    return this.productService.findAll(skip, take, sortBy, order);
+    return this.productService.findAll(skip, take, sortBy, order, categoryId);
   }
 
   @Get(':id')

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Badge, Card, Flex, Group, Image, Stack, Text, createStyles, rem } from '@mantine/core';
+import { Badge, Card, Flex, Group, Image, Stack, Text, createStyles, Rating } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import { Product } from '../../../types';
 import CartButton from './cartButton/CartButton';
@@ -10,7 +10,7 @@ const useStyles = createStyles(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
-    width: rem(280),
+    width: 280,
     height: '100%',
     boxShadow: theme.shadows.sm,
     borderRadius: theme.radius.md,
@@ -63,6 +63,7 @@ export default function ProductCard({ product }: Props) {
         <Text sx={{ flex: '1 auto' }} fw={500}>
           {name}
         </Text>
+        <Rating value={5} readOnly size='xs' />
         <Text fz='xl' fw={700}>
           ${price}
         </Text>

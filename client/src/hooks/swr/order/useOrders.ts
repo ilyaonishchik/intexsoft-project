@@ -10,7 +10,8 @@ const fetcher = async (url: string) => {
   return (await response.json()) as [Order[], number];
 };
 
-type Args = Partial<PaginationArgs> & {
+type Args = {
+  pagination?: PaginationArgs;
   status?: OrderStatus;
 };
 

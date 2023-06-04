@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import { PaginationArgs, Product, SortingArgs } from '../../../types';
+import { generateQuery } from '../../../utils/generateQuery';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
@@ -7,11 +8,13 @@ const fetcher = async (url: string) => {
   return (await response.json()) as [Product[], number];
 };
 
-type Args = Partial<PaginationArgs> & Partial<SortingArgs>;
+type Args = {
+  pagination?: PaginationArgs;
+  sorting?: SortingArgs;
+  categoryId?: string;
+};
 
-export const useProducts = ({ skip = 0, take = 10, sortBy = 'updatedAt', order = 'desc' }: Args) => {
-  return useSWR<[Product[], number], Error>(
-    `${import.meta.env.VITE_SERVER_URL}/products?skip=${skip}&take=${take}&sortBy=${sortBy}&order=${order}`,
-    fetcher
-  );
+export const useProducts = (args?: Args) => {
+  const query = generateQuery(args);
+  return useSWR<[Product[], number], Error>(`${import.meta.env.VITE_SERVER_URL}/products${query}`, fetcher);
 };

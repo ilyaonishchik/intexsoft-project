@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review } from './entities/review.entity';
 import { Repository } from 'typeorm';
@@ -26,6 +26,10 @@ export class ReviewService {
     });
     const succeededOrder = orders.find((order) => order.status === 'succeeded');
     if (!succeededOrder) throw new ForbiddenException('You can leave a review only about the purchased product');
+    const review = await this.reviewRepository.findOne({
+      where: { user: { id: user.id }, product: { id: product.id } },
+    });
+    if (review) throw new ConflictException('You have already left a review');
     return this.reviewRepository.save({ user, product, rating, text });
   }
 

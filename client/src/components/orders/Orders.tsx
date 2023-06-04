@@ -7,10 +7,10 @@ import { usePagination } from '../../hooks/custom/usePagination';
 import { OrderStatus } from '../../types';
 
 export default function Orders() {
-  const { page, setPage, take } = usePagination(1, 20);
+  const { page, setPage, take } = usePagination(1, 10);
   const [status, setStatus] = useState<OrderStatus>('succeeded');
 
-  const { error, data } = useOrders({ take: 10, status });
+  const { error, data } = useOrders({ pagination: { skip: 0, take: 10 }, status });
   if (!data) return <Loading />;
   if (error) return <Error />;
 

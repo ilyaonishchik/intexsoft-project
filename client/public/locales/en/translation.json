@@ -35,5 +35,7 @@
   "total": "Total",
   "promoCode": "Promo code",
   "apply": "Apply",
-  "yourCartIsEmpty": "Your cart is empty"
+  "yourCartIsEmpty": "Your cart is empty",
+  "signIn": "Sign in",
+  "search": "Search"
 }

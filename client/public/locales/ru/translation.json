@@ -35,5 +35,7 @@
   "total": "Итого",
   "promoCode": "Промокод",
   "apply": "Применить",
-  "yourCartIsEmpty": "Ваша корзина пуста"
+  "yourCartIsEmpty": "Ваша корзина пуста",
+  "signIn": "Войти",
+  "search": "Поиск"
 }

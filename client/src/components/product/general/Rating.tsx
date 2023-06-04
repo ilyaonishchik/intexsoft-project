@@ -18,7 +18,7 @@ export default function Rating({ productId }: Props) {
 
   return (
     <Group>
-      <MantineRating value={averageRating} fractions={4} readOnly />
+      <MantineRating value={averageRating} fractions={4} readOnly size='xl' />
       <Text>({count})</Text>
     </Group>
   );

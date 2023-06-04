@@ -29,8 +29,15 @@ export class ProductService {
     return product;
   }
 
-  findAll(skip: number, take: number, sortBy: string, order: OrderEnum): Promise<[Product[], number]> {
+  findAll(
+    skip: number,
+    take: number,
+    sortBy: string,
+    order: OrderEnum,
+    categoryId: number,
+  ): Promise<[Product[], number]> {
     return this.productRepository.findAndCount({
+      where: { category: { id: categoryId } },
       relations: { category: true, images: { image: true } },
       skip,
       take,

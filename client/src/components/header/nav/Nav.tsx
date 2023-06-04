@@ -97,7 +97,7 @@ export default function Nav() {
         </Menu>
       ) : (
         <Button component={Link} to='/auth'>
-          Sign in
+          {t('signIn')}
         </Button>
       )}
     </nav>

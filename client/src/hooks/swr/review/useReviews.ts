@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { Review } from '../../../types';
+import { PaginationArgs, Review } from '../../../types';
 import { generateQuery } from '../../../utils/generateQuery';
 
 const fetcher = async (url: string) => {
@@ -9,6 +9,7 @@ const fetcher = async (url: string) => {
 };
 
 type Args = {
+  pagination?: PaginationArgs;
   productId?: number;
 };
 

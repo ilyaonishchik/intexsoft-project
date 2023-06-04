@@ -2,6 +2,7 @@ import { Stack } from '@mantine/core';
 import { useReviews } from '../../../hooks/swr/review/useReviews';
 import { Error, Loading } from '../../common';
 import Review from './Review';
+import AddReview from './addReview/AddReview';
 
 type Props = {
   productId: number;
@@ -16,6 +17,7 @@ export default function Reviews({ productId }: Props) {
 
   return (
     <Stack>
+      <AddReview productId={productId} />
       {reviews.map(review => (
         <Review key={review.id} review={review} />
       ))}

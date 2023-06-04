@@ -12,7 +12,10 @@ export default function Table() {
   const { page, setPage, take, setTake } = usePagination(1, 20);
   const { sortBy, setSortBy, order, setOrder } = useSorting('updatedAt', 'desc');
 
-  const { error, data } = useProducts({ skip: (page - 1) * Number(take), take, sortBy, order });
+  const { error, data } = useProducts({
+    pagination: { skip: (page - 1) * Number(take), take },
+    sorting: { sortBy, order },
+  });
 
   if (!data) return <Loading />;
   if (error) return <Error />;
