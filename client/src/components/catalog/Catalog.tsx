@@ -3,12 +3,10 @@ import { ActionIcon, Center, Container, Group, Stack, Title } from '@mantine/cor
 import { useDisclosure } from '@mantine/hooks';
 import { IconAdjustments } from '@tabler/icons-react';
 import { useProducts } from '../../hooks/swr/product/useProducts';
-import { Error, Loading } from '../common';
+import { Error, Loading, Pagination, Sorting } from '../common';
 import { usePagination } from '../../hooks/custom/usePagination';
 import { useSorting } from '../../hooks/custom/useSorting';
-import Sorting from './Sorting';
 import Products from './Products';
-import Pagination from './Pagination';
 import Filters from './filters/Filters';
 import FiltersModal from './FiltersModal';
 import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
@@ -62,6 +60,7 @@ export default function Catalog() {
                 total={Math.ceil(count / Number(take))}
                 page={page}
                 onPageChange={setPage}
+                takeData={['3', '6', '9']}
                 take={take}
                 onTakeChange={value => setTake(Number(value))}
               />

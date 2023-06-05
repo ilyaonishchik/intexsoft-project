@@ -1,15 +1,15 @@
 import { Menu } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { IconTrash } from '@tabler/icons-react';
-import { Product } from '../../../../types';
-import { useCustomMediaQuery } from '../../../../hooks/custom/useCustomMediaQuery';
-import { useDeleteProduct } from '../../../../hooks/swr/product/useDeleteProduct';
+import { useCustomMediaQuery } from '../../../hooks/custom/useCustomMediaQuery';
+import { useDeleteProduct } from '../../../hooks/swr/product/useDeleteProduct';
+import { Product } from '../../../types';
 
 type Props = {
   product: Product;
 };
 
-export default function TableItem({ product }: Props) {
+export default function Row({ product }: Props) {
   const largerThanSM = useCustomMediaQuery('larger', 'sm');
 
   const { trigger } = useDeleteProduct(product.id);
