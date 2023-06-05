@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, LessThan, MoreThan, Repository } from 'typeorm';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
 import { OrderEnum } from 'src/_common/enums/order.enum';
@@ -35,9 +35,22 @@ export class ProductService {
     sortBy: string,
     order: OrderEnum,
     categoryName: string,
+    minPrice: number,
+    maxPrice: number,
   ): Promise<[Product[], number]> {
+    console.log(minPrice, maxPrice);
     return this.productRepository.findAndCount({
-      where: { category: { name: categoryName } },
+      where: {
+        category: { name: categoryName },
+        price:
+          minPrice && maxPrice
+            ? Between(minPrice, maxPrice)
+            : minPrice
+            ? MoreThan(minPrice)
+            : maxPrice
+            ? LessThan(maxPrice)
+            : null,
+      },
       relations: { category: true, images: { image: true } },
       skip,
       take,

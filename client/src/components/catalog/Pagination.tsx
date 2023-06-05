@@ -10,7 +10,7 @@ type Props = {
 
 export default function Pagination({ total, page, onPageChange, take, onTakeChange }: Props) {
   return (
-    <Group>
+    <Group position='center'>
       <MantinePagination total={total} value={page} onChange={onPageChange} />
       <Group>
         <Text>Show:</Text>

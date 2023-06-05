@@ -1,12 +1,14 @@
 import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { Loader, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import './index.css';
 import App from './App.tsx';
 import AuthProvider from './lib/auth/AuthProvider.tsx';
 import './i18n';
+import { store } from './redux/store.ts';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
@@ -20,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <AuthProvider>
         <Notifications />
         <Suspense fallback={<Loader />}>
-          <App />
+          <Provider store={store}>
+            <App />
+          </Provider>
         </Suspense>
       </AuthProvider>
     </MantineProvider>

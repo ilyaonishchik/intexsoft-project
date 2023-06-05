@@ -8,10 +8,16 @@ const fetcher = async (url: string) => {
   return (await response.json()) as [Product[], number];
 };
 
+type PriceArgs = {
+  minPrice: number;
+  maxPrice: number;
+};
+
 type Args = {
   pagination?: PaginationArgs;
   sorting?: SortingArgs;
   categoryName?: string;
+  price?: PriceArgs;
 };
 
 export const useProducts = (args?: Args) => {

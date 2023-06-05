@@ -67,7 +67,7 @@ export default function Table() {
         <Group spacing='xs'>
           <Text size='sm'>Show:</Text>
           <Select
-            data={['1', '5', '10', '20']}
+            data={['10', '20']}
             value={String(take)}
             onChange={value => setTake(Number(value))}
             size='xs'

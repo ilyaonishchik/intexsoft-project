@@ -36,8 +36,10 @@ export class ProductController {
     @Query('sortBy') sortBy = 'updatedAt',
     @Query('order') order = OrderEnum.desc,
     @Query('categoryName') categoryName: string,
+    @Query('minPrice') minPrice: number,
+    @Query('maxPrice') maxPrice: number,
   ): Promise<[Product[], number]> {
-    return this.productService.findAll(skip, take, sortBy, order, categoryName);
+    return this.productService.findAll(skip, take, sortBy, order, categoryName, minPrice, maxPrice);
   }
 
   @Get(':id')

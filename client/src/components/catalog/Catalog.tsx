@@ -1,23 +1,34 @@
 import { useParams } from 'react-router-dom';
-import { Container, Group, SimpleGrid, Stack, Title } from '@mantine/core';
+import { ActionIcon, Center, Container, Group, Stack, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconAdjustments } from '@tabler/icons-react';
 import { useProducts } from '../../hooks/swr/product/useProducts';
-import { Error, Loading, ProductCard } from '../common';
+import { Error, Loading } from '../common';
 import { usePagination } from '../../hooks/custom/usePagination';
 import { useSorting } from '../../hooks/custom/useSorting';
 import Sorting from './Sorting';
+import Products from './Products';
 import Pagination from './Pagination';
-import Filters from './Filters';
+import Filters from './filters/Filters';
+import FiltersModal from './FiltersModal';
+import { useCustomMediaQuery } from '../../hooks/custom/useCustomMediaQuery';
+import { useAppSelector } from '../../redux/hooks';
 
 export default function Catalog() {
-  const { categoryName } = useParams();
+  const largerThanMD = useCustomMediaQuery('larger', 'md');
 
+  const { categoryName } = useParams();
   const { sortBy, setSortBy, order, setOrder } = useSorting('price', 'desc');
   const { page, setPage, take, setTake } = usePagination(1, 9);
+  const { from, to } = useAppSelector(state => state.catalog.price);
+
+  const [opened, { open, close }] = useDisclosure();
 
   const { error, data } = useProducts({
     sorting: { sortBy, order },
     pagination: { skip: (page - 1) * Number(take), take },
     categoryName,
+    price: { minPrice: from, maxPrice: to },
   });
   if (!data) return <Loading />;
   if (error) return <Error />;
@@ -28,27 +39,35 @@ export default function Catalog() {
       <Stack>
         <Title>Catalog</Title>
         <Group position='apart' align='start' sx={{ flexWrap: 'nowrap' }}>
-          <Stack>
-            <Sorting
-              sortBy={sortBy}
-              onSortByChange={value => setSortBy(value!)}
-              order={order}
-              onOrderChange={value => setOrder(value!)}
-            />
-            <SimpleGrid cols={3}>
-              {products.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </SimpleGrid>
-            <Pagination
-              total={Math.ceil(count / Number(take))}
-              page={page}
-              onPageChange={setPage}
-              take={take}
-              onTakeChange={value => setTake(Number(value))}
-            />
-          </Stack>
-          <Filters />
+          <Center sx={{ flex: 'auto' }}>
+            <Stack>
+              <Group position='apart'>
+                <Sorting
+                  sortBy={sortBy}
+                  onSortByChange={value => setSortBy(value!)}
+                  order={order}
+                  onOrderChange={value => setOrder(value!)}
+                />
+                {!largerThanMD && (
+                  <>
+                    <ActionIcon onClick={open} size='lg' variant='filled' color='cyan' sx={{ alignSelf: 'end' }}>
+                      <IconAdjustments stroke={1} />
+                    </ActionIcon>
+                    <FiltersModal opened={opened} close={close} />
+                  </>
+                )}
+              </Group>
+              <Products products={products} />
+              <Pagination
+                total={Math.ceil(count / Number(take))}
+                page={page}
+                onPageChange={setPage}
+                take={take}
+                onTakeChange={value => setTake(Number(value))}
+              />
+            </Stack>
+          </Center>
+          {largerThanMD && <Filters />}
         </Group>
       </Stack>
     </Container>
