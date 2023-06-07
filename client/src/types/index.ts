@@ -17,3 +17,6 @@ export * from './Order';
 export * from './OrderItem';
 export * from './OrderStatus';
 export * from './Review';
+export * from './Parameter';
+export * from './ProductParameter';
+export * from './ParameterCategory';

@@ -22,6 +22,7 @@ import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { AddressModule } from './address/address.module';
 import { ReviewModule } from './review/review.module';
+import { ProductParameterModule } from './product-parameter/product-parameter.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { ReviewModule } from './review/review.module';
     OrderItemModule,
     AddressModule,
     ReviewModule,
+    ProductParameterModule,
   ],
   controllers: [AppController],
   providers: [AppService],

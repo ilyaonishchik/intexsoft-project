@@ -7,7 +7,7 @@ import Carousel from './Carousel';
 import General from './general/General';
 import Pricing from './Pricing';
 import Reviews from './reviews/Reviews';
-import Parameters from './parameters/Parameters';
+import Parameters from './Parameters';
 import ReviewsTab from './ReviewsTab';
 
 export default function Product() {
@@ -17,7 +17,7 @@ export default function Product() {
   if (!product) return <Loading />;
   if (error) return <Error />;
 
-  const { name, price, images } = product;
+  const { name, price, images, parameters } = product;
 
   return (
     <Container size='xl'>
@@ -38,7 +38,7 @@ export default function Product() {
             </Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value='parameters' mt='md'>
-            <Parameters />
+            <Parameters parameters={parameters} />
           </Tabs.Panel>
           <Tabs.Panel value='reviews' mt='md'>
             <Reviews productId={product.id} />

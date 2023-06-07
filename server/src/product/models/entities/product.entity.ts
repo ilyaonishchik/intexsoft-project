@@ -12,6 +12,7 @@ import { Category } from 'src/category/models/entities/category.entity';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { OrderItem } from 'src/order-item/models/entities/order-item.entity';
 import { Review } from 'src/review/entities/review.entity';
+import { ProductParameter } from 'src/product-parameter/models/entities/product-parameter.entity';
 
 @Entity('product')
 export class Product {
@@ -47,4 +48,7 @@ export class Product {
 
   @OneToMany(() => Review, (review) => review.product)
   reviews: Review[];
+
+  @OneToMany(() => ProductParameter, (productParameter) => productParameter.product)
+  parameters: ProductParameter[];
 }

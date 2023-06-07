@@ -38,7 +38,6 @@ export class ProductService {
     minPrice: number,
     maxPrice: number,
   ): Promise<[Product[], number]> {
-    console.log(minPrice, maxPrice);
     return this.productRepository.findAndCount({
       where: {
         category: { name: categoryName },
@@ -61,7 +60,7 @@ export class ProductService {
   async findOne(id: number): Promise<Product> {
     const product = await this.productRepository.findOne({
       where: { id },
-      relations: { category: true, images: { image: true } },
+      relations: { category: true, images: { image: true }, parameters: { parameter: { category: true } } },
     });
     if (!product) throw new NotFoundException(`Product with id ${id} not found`);
     return product;
