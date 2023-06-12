@@ -23,6 +23,7 @@ import { OrderItemModule } from './order-item/order-item.module';
 import { AddressModule } from './address/address.module';
 import { ReviewModule } from './review/review.module';
 import { ProductParameterModule } from './product-parameter/product-parameter.module';
+import { ComparedModule } from './compared/compared.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { ProductParameterModule } from './product-parameter/product-parameter.mo
     AddressModule,
     ReviewModule,
     ProductParameterModule,
+    ComparedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

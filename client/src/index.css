@@ -13,4 +13,10 @@ body,
 
 main {
   flex: auto;
+  padding-top: 10px;
+}
+
+.swiper-button-prev, 
+.swiper-button-next {
+  color: #15aabf;
 }

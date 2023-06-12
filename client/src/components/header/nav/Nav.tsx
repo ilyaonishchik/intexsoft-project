@@ -5,7 +5,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import {
   IconBell,
-  IconChartBar,
   IconChevronDown,
   IconChevronUp,
   IconDeviceMobile,
@@ -20,6 +19,7 @@ import {
 import { useCustomMediaQuery } from '../../../hooks/custom/useCustomMediaQuery';
 import { useAuth } from '../../../lib/auth/useAuth';
 import CartLink from './CartLink';
+import ComparedLink from './ComparedLink';
 
 export default function Nav() {
   const { t } = useTranslation();
@@ -84,7 +84,8 @@ export default function Nav() {
             )}
             <CartLink />
             <NavLink label={t('favorites')} icon={<IconHeart stroke='1' />} component={Link} to='/favorites' />
-            <NavLink label={t('compared')} icon={<IconChartBar stroke='1' />} component={Link} to='/compared' />
+            {/* <NavLink label={t('compared')} icon={<IconChartBar stroke='1' />} component={Link} to='/compared' /> */}
+            <ComparedLink />
             <NavLink label={t('orders')} icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
             <NavLink label={t('profile')} icon={<IconUserCircle stroke='1' />} component={Link} to='/profile' />
             <NavLink label={t('notifications')} icon={<IconBell stroke='1' />} component={Link} to='/notifications' />

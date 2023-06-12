@@ -12,7 +12,7 @@ type Props = {
 
 export default function Order({ orderId }: Props) {
   const largerThanXS = useCustomMediaQuery('larger', 'xs');
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle }] = useDisclosure(true);
 
   const { error, data: order } = useOrder(orderId);
   if (!order) return <Loading />;

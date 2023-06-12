@@ -1,5 +1,5 @@
 import { Accordion, ActionIcon, Box, Flex, Popover, SimpleGrid, Text } from '@mantine/core';
-import { IconPlus, IconQuestionMark } from '@tabler/icons-react';
+import { IconExclamationMark, IconPlus } from '@tabler/icons-react';
 import { ParameterCategory, ProductParameter } from '../../types';
 
 type Props = {
@@ -56,7 +56,7 @@ export default function Parameters({ parameters }: Props) {
                         <Popover width={200}>
                           <Popover.Target>
                             <ActionIcon variant='outline' color='cyan' radius='xl' size='xs'>
-                              <IconQuestionMark />
+                              <IconExclamationMark />
                             </ActionIcon>
                           </Popover.Target>
                           <Popover.Dropdown>

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Container, Group, Stack, Tabs, Title, Text } from '@mantine/core';
+import { Container, Stack, Tabs, Title, Text, SimpleGrid } from '@mantine/core';
 import { IconChartBar, IconMessage } from '@tabler/icons-react';
 import { useProduct } from '../../hooks/swr/product/useProduct';
 import { Error, Loading } from '../common';
@@ -21,13 +21,13 @@ export default function Product() {
 
   return (
     <Container size='xl'>
-      <Stack>
+      <Stack spacing='xl'>
         <Title>{name}</Title>
-        <Group position='apart'>
+        <SimpleGrid breakpoints={[{ minWidth: 'md', cols: 3 }]} sx={{ alignItems: 'center', justifyItems: 'center' }}>
           <Carousel productImages={images} />
           <General productId={product.id} />
           <Pricing price={price} />
-        </Group>
+        </SimpleGrid>
         <Tabs variant='pills' radius='xl' defaultValue='parameters'>
           <Tabs.List>
             <Tabs.Tab value='parameters' icon={<IconChartBar stroke='1' />}>

@@ -15,7 +15,7 @@ export default function CartLink() {
 
   return (
     <Box pos='relative'>
-      <NavLink label={t('cart')} icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart' />
+      <NavLink label={t('cart')} icon={<IconShoppingCart stroke='1' />} component={Link} to='/cart' pr={40} />
       {!!count && (
         <Badge pos='absolute' top={5} right={5} variant='filled' size='xs'>
           {count}

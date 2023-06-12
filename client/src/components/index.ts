@@ -1,3 +1,4 @@
+import Test from './Test';
 import Dashboard from './admin/dashboard/Dashboard';
 import Products from './admin/products/Products';
 import Auth from './auth/Auth';
@@ -28,4 +29,5 @@ export {
   Order,
   Product,
   Settings,
+  Test,
 };

@@ -16,6 +16,7 @@ import {
   Products,
   Profile,
   Settings,
+  Test,
 } from './components';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         )}
       </Route>
       {!me && <Route path='auth' element={<Auth />} />}
+      <Route path='test' element={<Test />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

@@ -3,15 +3,15 @@ import { Badge, Card, Flex, Group, Image, Stack, Text, createStyles, Rating } fr
 import { Carousel } from '@mantine/carousel';
 import { Product } from '../../../types';
 import CartButton from './cartButton/CartButton';
-import ComapredButton from './comparedButton/ComapredButton';
-import FavoritesButton from './favoritesButton/FavoritesButton';
+import ComparedButton from './ComparedButton';
+import FavoritesButton from './FavoritesButton';
 
 const useStyles = createStyles(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: 280,
-    height: '100%',
+    // height: '100%',
     boxShadow: theme.shadows.sm,
     borderRadius: theme.radius.md,
   },
@@ -19,11 +19,20 @@ const useStyles = createStyles(theme => ({
     position: 'absolute',
     zIndex: 1,
     top: 10,
-    right: 10,
+    left: 10,
     gap: theme.spacing.xs,
   },
   image: {
     cursor: 'pointer',
+  },
+  name: {
+    display: '-webkit-box',
+    height: 50,
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    fontWeight: 500,
   },
 }));
 
@@ -59,20 +68,18 @@ export default function ProductCard({ product }: Props) {
             ))}
         </Carousel>
       </Card.Section>
-      <Flex sx={{ flex: 'auto' }} direction='column' gap='xs'>
-        <Text sx={{ flex: '1 auto' }} fw={500}>
-          {name}
-        </Text>
+      <Stack spacing='xs'>
+        <Text className={classes.name}>{name}</Text>
         <Rating value={5} readOnly size='xs' />
         <Text fz='xl' fw={700}>
           ${price}
         </Text>
         <Group position='apart'>
           <FavoritesButton />
-          <ComapredButton />
+          <ComparedButton productId={id} />
           <CartButton productId={id} />
         </Group>
-      </Flex>
+      </Stack>
     </Card>
   );
 }
