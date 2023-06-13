@@ -1,8 +1,9 @@
 import { Accordion, Flex, Stack } from '@mantine/core';
 import Actions from './Actions';
 import Carousel from './Carousel';
-import { Tab } from '../Compared';
+import { Tab } from './Compared';
 import Section from './Section';
+import Fixed from './Fixed';
 
 type Props = {
   tab: Tab;
@@ -15,6 +16,7 @@ export default function Panel({ tab }: Props) {
         <Actions />
         <Carousel products={tab.products} />
       </Flex>
+      <Fixed products={tab.products} />
       <Accordion
         multiple
         defaultValue={tab.sections.map(item => item.category.name)}

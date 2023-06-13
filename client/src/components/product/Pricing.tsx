@@ -6,12 +6,14 @@ type Props = {
 
 export default function Pricing({ price }: Props) {
   return (
-    <Paper p='sm' withBorder shadow='sm'>
+    <Paper p='md' withBorder shadow='sm' radius='xl'>
       <Stack align='center'>
         <Text size={30} fw={700}>
           ${price}
         </Text>
-        <Button size='xl'>Add to cart</Button>
+        <Button size='xl' radius='lg'>
+          Add to cart
+        </Button>
       </Stack>
     </Paper>
   );

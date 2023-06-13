@@ -41,7 +41,7 @@ export default function Parameters({ parameters }: Props) {
         .map(item => (
           <Accordion.Item key={item.category.id} value={item.category.name}>
             <Accordion.Control>
-              <Text fz={24} fw={700}>
+              <Text fz={24} fw={500}>
                 {item.category.name}
               </Text>
             </Accordion.Control>
@@ -73,7 +73,7 @@ export default function Parameters({ parameters }: Props) {
                           borderBottomColor: theme.colors.gray[4],
                         })}
                       />
-                      <Text fz={18} fw={700}>
+                      <Text fz={18} fw={500}>
                         {parameter.value}
                       </Text>
                     </Flex>
