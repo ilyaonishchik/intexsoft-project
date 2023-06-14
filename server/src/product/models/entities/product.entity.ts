@@ -13,6 +13,7 @@ import { CartItem } from 'src/cart-item/entities/cart-item.entity';
 import { OrderItem } from 'src/order-item/models/entities/order-item.entity';
 import { Review } from 'src/review/entities/review.entity';
 import { ProductParameter } from 'src/product-parameter/models/entities/product-parameter.entity';
+import { ProductGroup } from 'src/product-group/models/entities/product-group.entity';
 
 @Entity('product')
 export class Product {
@@ -51,4 +52,7 @@ export class Product {
 
   @OneToMany(() => ProductParameter, (productParameter) => productParameter.product)
   parameters: ProductParameter[];
+
+  @ManyToOne(() => ProductGroup, (productGroup) => productGroup.products)
+  group: ProductGroup;
 }

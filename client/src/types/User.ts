@@ -1,5 +1,4 @@
-import { Address } from '.';
-import { Role } from './Role';
+import { Address, Role } from '.';
 
 export type User = {
   id: number;

@@ -1,8 +1,5 @@
 import { IPaymentStatus } from '@a2seven/yoo-checkout';
-import { OrderItem } from '.';
-import { Address } from './Address';
-import { User } from './User';
-import { OrderStatus } from './OrderStatus';
+import { OrderItem, OrderStatus, User, Address } from '.';
 
 export type Order = {
   id: number;

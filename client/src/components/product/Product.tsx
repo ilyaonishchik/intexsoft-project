@@ -25,7 +25,7 @@ export default function Product() {
         <Title>{name}</Title>
         <SimpleGrid breakpoints={[{ minWidth: 'md', cols: 3 }]} sx={{ alignItems: 'center', justifyItems: 'center' }}>
           <Carousel productImages={images} />
-          <General productId={product.id} />
+          <General product={product} />
           <Pricing price={price} />
         </SimpleGrid>
         <Tabs variant='pills' radius='xl' defaultValue='parameters'>

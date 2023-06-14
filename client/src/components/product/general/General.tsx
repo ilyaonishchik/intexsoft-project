@@ -1,14 +1,17 @@
 import { Stack } from '@mantine/core';
 import Rating from './Rating';
+import Variations from './Variations';
+import { Product } from '../../../types';
 
 type Props = {
-  productId: number;
+  product: Product;
 };
 
-export default function General({ productId }: Props) {
+export default function General({ product }: Props) {
   return (
-    <Stack>
-      <Rating productId={productId} />
+    <Stack spacing='xl' sx={{ alignItems: 'center' }}>
+      <Rating productId={product.id} />
+      <Variations product={product} />
     </Stack>
   );
 }

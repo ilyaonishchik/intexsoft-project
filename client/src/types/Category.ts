@@ -1,4 +1,4 @@
-import { Image } from './Image';
+import { Image } from '.';
 
 export type Category = {
   id: number;

@@ -1,4 +1,4 @@
-import { Category, ProductImage, ProductParameter } from '.';
+import { Category, ProductGroup, ProductImage, ProductParameter } from '.';
 
 export type Product = {
   id: number;
@@ -10,4 +10,5 @@ export type Product = {
   images?: ProductImage[];
   category?: Category;
   parameters?: ProductParameter[];
+  group?: ProductGroup;
 };

@@ -21,3 +21,4 @@ export * from './Parameter';
 export * from './ProductParameter';
 export * from './ParameterCategory';
 export * from './Compared';
+export * from './ProductGroup';

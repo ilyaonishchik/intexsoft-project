@@ -24,6 +24,7 @@ import { AddressModule } from './address/address.module';
 import { ReviewModule } from './review/review.module';
 import { ProductParameterModule } from './product-parameter/product-parameter.module';
 import { ComparedModule } from './compared/compared.module';
+import { ProductGroupModule } from './product-group/product-group.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { ComparedModule } from './compared/compared.module';
     ReviewModule,
     ProductParameterModule,
     ComparedModule,
+    ProductGroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],
