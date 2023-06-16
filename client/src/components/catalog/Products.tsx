@@ -1,12 +1,36 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Center, SimpleGrid } from '@mantine/core';
-import { Product } from '../../types';
-import { ProductCard } from '../common';
+import { Loading, Error, ProductCard } from '../common';
+import { useProducts } from '../../hooks/swr/product';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setCount } from '../../redux/slices/catalogSlice';
 
-type Props = {
-  products: Product[];
-};
+export default function Products() {
+  const dispatch = useAppDispatch();
 
-export default function Products({ products }: Props) {
+  const { categoryName } = useParams();
+
+  const { page, take, sortBy, order, price } = useAppSelector(state => state.catalog);
+
+  const { error, data } = useProducts({
+    sorting: { sortBy, order },
+    pagination: { skip: (page - 1) * Number(take), take },
+    categoryName,
+    price: { minPrice: price.from, maxPrice: price.to },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const [, count] = data;
+      dispatch(setCount(count));
+    }
+  }, [data, dispatch]);
+
+  if (!data) return <Loading />;
+  if (error) return <Error />;
+  const [products] = data;
+
   return (
     <Center>
       <SimpleGrid
