@@ -5,7 +5,6 @@ import { diskStorage } from 'multer';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
-import { OrderEnum } from 'src/_common/enums/order.enum';
 import { MessageResponse } from 'src/_common/message.response';
 
 @Controller('products')
@@ -31,15 +30,27 @@ export class ProductController {
 
   @Get()
   findAll(
-    @Query('skip') skip: number,
-    @Query('take') take: number,
-    @Query('sortBy') sortBy = 'updatedAt',
-    @Query('order') order = OrderEnum.desc,
-    @Query('categoryName') categoryName: string,
-    @Query('minPrice') minPrice: number,
-    @Query('maxPrice') maxPrice: number,
+    @Query()
+    {
+      take,
+      skip,
+      sortBy = 'updatedAt',
+      order = 'desc',
+      categoryName,
+      minPrice,
+      maxPrice,
+      ...rest
+    }: {
+      take: number;
+      skip: number;
+      sortBy: string;
+      order: string;
+      categoryName: string;
+      minPrice: number;
+      maxPrice: number;
+    },
   ): Promise<[Product[], number]> {
-    return this.productService.findAll(skip, take, sortBy, order, categoryName, minPrice, maxPrice);
+    return this.productService.findAll(skip, take, sortBy, order, categoryName, minPrice, maxPrice, rest);
   }
 
   @Get(':id')

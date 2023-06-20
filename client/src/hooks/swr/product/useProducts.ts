@@ -18,6 +18,7 @@ type Args = {
   sorting?: SortingArgs;
   categoryName?: string;
   price?: PriceArgs;
+  filters?: object;
 };
 
 export const useProducts = (args?: Args) => {

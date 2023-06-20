@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, LessThan, MoreThan, Repository } from 'typeorm';
+import { Between, In, LessThan, MoreThan, Repository } from 'typeorm';
 import { CreateProductDto } from './models/dto/create-product.dto';
 import { Product } from './models/entities/product.entity';
-import { OrderEnum } from 'src/_common/enums/order.enum';
 import { MessageResponse } from 'src/_common/message.response';
 import { Category } from 'src/category/models/entities/category.entity';
 import { Image } from 'src/image/models/entities/image.entity';
 import { ProductImage } from 'src/product-image/entities/product-image.entity';
+import { Parameter } from 'src/parameter/models/entities/parameter.entity';
 
 @Injectable()
 export class ProductService {
@@ -16,6 +16,7 @@ export class ProductService {
     @InjectRepository(Category) private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Image) private readonly imageRepository: Repository<Image>,
     @InjectRepository(ProductImage) private readonly productImageRepository: Repository<ProductImage>,
+    @InjectRepository(Parameter) private readonly parameterRepository: Repository<Parameter>,
   ) {}
 
   async create({ categoryId, files, name, price, quantity }: CreateProductDto): Promise<Product> {
@@ -29,17 +30,21 @@ export class ProductService {
     return product;
   }
 
-  findAll(
+  async findAll(
     skip: number,
     take: number,
     sortBy: string,
-    order: OrderEnum,
+    order: string,
     categoryName: string,
     minPrice: number,
     maxPrice: number,
+    rest: object,
   ): Promise<[Product[], number]> {
+    const names = Object.keys(rest).length ? await this.findProductsNamesByFiltersQuery(rest) : null;
+
     return this.productRepository.findAndCount({
       where: {
+        name: Object.keys(rest).length ? In(names) : null,
         category: { name: categoryName },
         price:
           minPrice && maxPrice
@@ -74,5 +79,34 @@ export class ProductService {
   async delete(id: number): Promise<MessageResponse> {
     await this.productRepository.delete({ id });
     return { message: `Product with id ${id} deleted succesfully` };
+  }
+
+  async findProductsNamesByFiltersQuery(query: object): Promise<string[]> {
+    const items: { parameter: Parameter; values: string[] }[] = [];
+    for (const key in query) {
+      const parameter = await this.parameterRepository.findOne({ where: { name: key } });
+      items.push({ parameter, values: query[key].split(',') });
+    }
+
+    const rows = items.map((item, index) => {
+      let row = index ? 'OR ' : 'WHERE ';
+      row += `(parameter.name = '${item.parameter.name}' AND product_parameter.`;
+      row +=
+        item.parameter.filterType === 'check'
+          ? `value IN ('${item.values.join("', '")}'))`
+          : `score BETWEEN ${item.values[0]} AND ${item.values[1]})`;
+      return row;
+    });
+
+    const sqlQuery = `
+      SELECT product.name FROM product
+      JOIN product_parameter ON product.id = product_parameter.productId
+      JOIN parameter ON parameter.id = product_parameter.parameterId
+      ${rows.join('\n      ')}
+      GROUP BY product.id
+      HAVING COUNT(DISTINCT parameter.name) = ${rows.length};
+    `;
+
+    return (await this.productRepository.query(sqlQuery)).map((item) => item.name);
   }
 }

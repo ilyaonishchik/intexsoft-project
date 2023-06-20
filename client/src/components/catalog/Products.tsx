@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Center, SimpleGrid } from '@mantine/core';
+import { Center, SimpleGrid, Text } from '@mantine/core';
 import { Loading, Error, ProductCard } from '../common';
 import { useProducts } from '../../hooks/swr/product';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -11,13 +11,19 @@ export default function Products() {
 
   const { categoryName } = useParams();
 
-  const { page, take, sortBy, order, price } = useAppSelector(state => state.catalog);
+  const { page, take, sortBy, order, price, filters } = useAppSelector(state => state.catalog);
+
+  const filtersObject = {};
+  filters.forEach(filter => {
+    filtersObject[filter.name] = filter.values.join();
+  });
 
   const { error, data } = useProducts({
     sorting: { sortBy, order },
     pagination: { skip: (page - 1) * Number(take), take },
     categoryName,
     price: { minPrice: price.from, maxPrice: price.to },
+    filters: filtersObject,
   });
 
   useEffect(() => {

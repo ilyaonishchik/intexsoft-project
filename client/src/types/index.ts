@@ -22,3 +22,5 @@ export * from './ProductParameter';
 export * from './ParameterCategory';
 export * from './Compared';
 export * from './ProductGroup';
+export * from './Filter';
+export * from './PriceFilter';

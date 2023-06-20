@@ -1,11 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-type Price = {
-  min: number;
-  max: number;
-  from: number;
-  to: number;
-};
+import { Filter, PriceFilter } from '../../types';
 
 type CatalogState = {
   count: number;
@@ -13,7 +7,8 @@ type CatalogState = {
   take: number;
   sortBy: string;
   order: string;
-  price: Price;
+  price: PriceFilter;
+  filters: Filter[];
 };
 
 const initialState: CatalogState = {
@@ -28,6 +23,7 @@ const initialState: CatalogState = {
     from: 0,
     to: 2000,
   },
+  filters: [],
 };
 
 export const catalogSlice = createSlice({
@@ -49,11 +45,41 @@ export const catalogSlice = createSlice({
     setOrder: (state, action: PayloadAction<string>) => {
       state.order = action.payload;
     },
-    setPrice: (state, action: PayloadAction<Price>) => {
+    setPrice: (state, action: PayloadAction<PriceFilter>) => {
       state.price = action.payload;
+    },
+    setFilters: (state, action: PayloadAction<Filter[]>) => {
+      state.filters = action.payload;
+    },
+    toggleFilter: (state, action: PayloadAction<string>) => {
+      const filterIndex = state.filters.findIndex(item => item.name === action.payload);
+      state.filters[filterIndex].opened = !state.filters[filterIndex].opened;
+    },
+    changeFilter: (state, action: PayloadAction<{ name: string; values: string[] }>) => {
+      const filterIndex = state.filters.findIndex(item => item.name === action.payload.name);
+      state.filters[filterIndex].values = action.payload.values;
+    },
+    clearFilters: state => {
+      state.price.from = state.price.min;
+      state.price.to = state.price.max;
+      state.filters.forEach(filter => {
+        filter.opened = false;
+        filter.values = [];
+      });
     },
   },
 });
 
-export const { setCount, setPage, setTake, setSortBy, setOrder, setPrice } = catalogSlice.actions;
+export const {
+  setCount,
+  setPage,
+  setTake,
+  setSortBy,
+  setOrder,
+  setPrice,
+  setFilters,
+  toggleFilter,
+  changeFilter,
+  clearFilters,
+} = catalogSlice.actions;
 export const catalogReducer = catalogSlice.reducer;

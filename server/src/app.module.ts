@@ -25,6 +25,7 @@ import { ReviewModule } from './review/review.module';
 import { ProductParameterModule } from './product-parameter/product-parameter.module';
 import { ComparedModule } from './compared/compared.module';
 import { ProductGroupModule } from './product-group/product-group.module';
+import { FilterModule } from './filter/filter.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { ProductGroupModule } from './product-group/product-group.module';
     ProductParameterModule,
     ComparedModule,
     ProductGroupModule,
+    FilterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
