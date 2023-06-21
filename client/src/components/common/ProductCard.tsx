@@ -1,17 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { Badge, Card, Flex, Group, Image, Stack, Text, createStyles, Rating } from '@mantine/core';
+import { Badge, Card, Group, Image, Stack, Text, createStyles, Rating } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
-import { Product } from '../../../types';
-import CartButton from './cartButton/CartButton';
-import ComparedButton from './ComparedButton';
-import FavoritesButton from './FavoritesButton';
+import { IconCheck, IconShoppingCart } from '@tabler/icons-react';
+import { Product } from '../../types';
+import { CartButton, ComparedButton, FavoritesButton } from '.';
 
 const useStyles = createStyles(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: 280,
-    // height: '100%',
     boxShadow: theme.shadows.sm,
     borderRadius: theme.radius.md,
   },
@@ -75,9 +73,9 @@ export default function ProductCard({ product }: Props) {
           ${price}
         </Text>
         <Group position='apart'>
-          <FavoritesButton />
-          <ComparedButton productId={id} />
-          <CartButton productId={id} />
+          <FavoritesButton productId={id} size='lg' />
+          <ComparedButton productId={id} size='lg' />
+          <CartButton productId={id} addIcon={<IconShoppingCart stroke={1} />} addedIcon={<IconCheck stroke={1} />} />
         </Group>
       </Stack>
     </Card>

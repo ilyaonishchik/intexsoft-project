@@ -6,6 +6,8 @@ import { CreateUserDto } from './models/dto/create-user.dto';
 import { UpdateUserDto } from './models/dto/update-user.dto';
 import { Role } from 'src/role/models/entities/role.entity';
 import { Cart } from 'src/cart/entities/cart.entity';
+import { Compared } from 'src/compared/models/entities/compared.entity';
+import { Favorites } from 'src/favorites/models/entities/favorites.entity';
 
 @Injectable()
 export class UserService {
@@ -13,6 +15,8 @@ export class UserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
     @InjectRepository(Cart) private readonly cartRepository: Repository<Cart>,
+    @InjectRepository(Compared) private readonly comparedRepository: Repository<Compared>,
+    @InjectRepository(Favorites) private readonly favoritesRepository: Repository<Favorites>,
   ) {}
 
   async create(dto: CreateUserDto): Promise<User> {
@@ -20,6 +24,8 @@ export class UserService {
     if (!defaultRole) throw new NotFoundException(`Role with name user not found`);
     const user = await this.userRepository.save({ ...dto, roles: [defaultRole] });
     await this.cartRepository.save({ user });
+    await this.comparedRepository.save({ user });
+    await this.favoritesRepository.save({ user });
     return user;
   }
 

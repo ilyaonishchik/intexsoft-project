@@ -19,18 +19,24 @@ export class CartController {
     private readonly cartItemService: CartItemService,
   ) {}
 
+  // @Post()
+  // @UseGuards(JwtGuard)
+  // async createCartItem(
+  //   @DecodedUser() { id }: JwtDecodedPayload,
+  //   @Body() { productId, quantity }: CreateCartItemDto,
+  // ): Promise<CartItem> {
+  //   const cart = await this.cartService.findOneByUserId(id);
+  //   const product = await this.productService.findOne(productId);
+  //   if (!product) throw new NotFoundException(`Product with id ${productId} not found`);
+  //   const cartItem = cart.items.find((item) => item.product.id === productId);
+  //   if (cartItem) return cartItem;
+  //   return this.cartItemService.create(cart, product, quantity);
+  // }
+
   @Post()
   @UseGuards(JwtGuard)
-  async createCartItem(
-    @DecodedUser() { id }: JwtDecodedPayload,
-    @Body() { productId, quantity }: CreateCartItemDto,
-  ): Promise<CartItem> {
-    const cart = await this.cartService.findOneByUserId(id);
-    const product = await this.productService.findOne(productId);
-    if (!product) throw new NotFoundException(`Product with id ${productId} not found`);
-    const cartItem = cart.items.find((item) => item.product.id === productId);
-    if (cartItem) return cartItem;
-    return this.cartItemService.create(cart, product, quantity);
+  toggleItem(@DecodedUser() { id }: JwtDecodedPayload, @Body() { productId }: { productId: number }) {
+    return this.cartService.toggleItem(id, productId);
   }
 
   @Get()

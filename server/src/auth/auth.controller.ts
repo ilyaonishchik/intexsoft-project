@@ -25,10 +25,17 @@ import { SignInDto } from './models/dto/sign-in.dto';
 import { JwtGuard } from './guards/jwt.guard';
 import { DecodedUser } from './decorators/decoded-user.decorator';
 import { JwtDecodedPayload } from './models/payloads/jwt-decoded.payload';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService, private userService: UserService, private jwtService: JwtService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private jwtService: JwtService,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
   @UseGuards(GoogleGuard)
   @Get('google')
@@ -49,7 +56,8 @@ export class AuthController {
   @Post('signUp')
   async signUp(@Body() signUpDto: SignUpDto, @Res({ passthrough: true }) response: Response): Promise<User> {
     const { email, password, name, surname } = signUpDto;
-    const candidate = await this.userService.findOneByEmail(email);
+    // const candidate = await this.userService.findOneByEmail(email);
+    const candidate = await this.userRepository.findOne({ where: { email } });
     if (candidate) throw new ConflictException('User with this email already exists');
     const passwordHash = bcrypt.hashSync(password, 5);
     const verificationLink = uuidv4();

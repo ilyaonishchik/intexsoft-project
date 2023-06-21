@@ -7,9 +7,15 @@ import { UserModule } from 'src/user/user.module';
 import { ProductModule } from 'src/product/product.module';
 import { CartItemModule } from 'src/cart-item/cart-item.module';
 import { CartItem } from 'src/cart-item/entities/cart-item.entity';
+import { Product } from 'src/product/models/entities/product.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Cart, CartItem]), forwardRef(() => UserModule), ProductModule, CartItemModule],
+  imports: [
+    TypeOrmModule.forFeature([Cart, CartItem, Product]),
+    forwardRef(() => UserModule),
+    ProductModule,
+    CartItemModule,
+  ],
   controllers: [CartController],
   providers: [CartService],
   exports: [CartService],

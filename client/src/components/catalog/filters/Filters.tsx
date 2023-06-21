@@ -46,10 +46,7 @@ export default function Filters() {
       })}
       <Paper p='sm' shadow='sm' radius='md' withBorder sx={{ position: 'sticky', bottom: 10, background: 'white' }}>
         <Group position='apart'>
-          <Group spacing='xs'>
-            <Text>Found</Text>
-            <Text fw={500}>{count} products</Text>
-          </Group>
+          <Text fw={500}>Found {count} products</Text>
           <Button
             onClick={() => dispatch(clearFilters())}
             variant='outline'

@@ -26,6 +26,7 @@ import { ProductParameterModule } from './product-parameter/product-parameter.mo
 import { ComparedModule } from './compared/compared.module';
 import { ProductGroupModule } from './product-group/product-group.module';
 import { FilterModule } from './filter/filter.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { FilterModule } from './filter/filter.module';
     ComparedModule,
     ProductGroupModule,
     FilterModule,
+    FavoritesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

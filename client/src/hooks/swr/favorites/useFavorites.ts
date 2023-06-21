@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { Compared, NestError } from '../../../types';
+import { Favorites, NestError } from '../../../types';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url, { credentials: 'include' });
@@ -7,8 +7,8 @@ const fetcher = async (url: string) => {
     const { message } = (await response.json()) as NestError;
     throw new Error(message);
   }
-  return (await response.json()) as Compared;
+  return (await response.json()) as Favorites;
 };
 
-export const useCompared = () =>
-  useSWR<Compared, Error>(`${import.meta.env.VITE_SERVER_URL}/compared`, fetcher, { revalidateOnFocus: false });
+export const useFavorites = () =>
+  useSWR<Favorites, Error>(`${import.meta.env.VITE_SERVER_URL}/favorites`, fetcher, { revalidateOnFocus: false });

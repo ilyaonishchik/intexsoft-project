@@ -24,3 +24,4 @@ export * from './Compared';
 export * from './ProductGroup';
 export * from './Filter';
 export * from './PriceFilter';
+export * from './Favorites';

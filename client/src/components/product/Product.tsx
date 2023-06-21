@@ -3,10 +3,10 @@ import { Container, Stack, Tabs, Title, Text, SimpleGrid } from '@mantine/core';
 import { IconChartBar, IconMessage } from '@tabler/icons-react';
 import { useProduct } from '../../hooks/swr/product/useProduct';
 import { Error, Loading } from '../common';
-import Carousel from './Carousel';
 import General from './general/General';
-import Pricing from './Pricing';
 import Reviews from './reviews/Reviews';
+import Carousel from './Carousel';
+import Pricing from './Pricing';
 import Parameters from './Parameters';
 import ReviewsTab from './ReviewsTab';
 
@@ -17,7 +17,7 @@ export default function Product() {
   if (!product) return <Loading />;
   if (error) return <Error />;
 
-  const { name, price, images, parameters } = product;
+  const { id: productId, name, price, images, parameters } = product;
 
   return (
     <Container size='xl'>
@@ -26,7 +26,7 @@ export default function Product() {
         <SimpleGrid breakpoints={[{ minWidth: 'md', cols: 3 }]} sx={{ alignItems: 'center', justifyItems: 'center' }}>
           <Carousel productImages={images} />
           <General product={product} />
-          <Pricing price={price} />
+          <Pricing price={price} productId={productId} />
         </SimpleGrid>
         <Tabs variant='pills' radius='xl' defaultValue='parameters'>
           <Tabs.List>

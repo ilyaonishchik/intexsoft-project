@@ -4,7 +4,7 @@ import { Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 
 
 @Entity('cart')
 export class Cart {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @OneToOne(() => User)
