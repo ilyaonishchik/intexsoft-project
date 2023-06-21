@@ -1,6 +1,6 @@
 ## Description
 
-Online Ecommerce Electronics Store "Spectrum"
+Online Ecommerce Electronics Store
 
 ## Instalation
 
