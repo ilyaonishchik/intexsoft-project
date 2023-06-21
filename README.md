@@ -20,14 +20,14 @@ $ npm install
 
 ## Running the app
 
-## Client
+### Client
 
 ```bash
 # development
 $ npm run dev
 ```
 
-## Server
+### Server
 
 ```bash
 # development
