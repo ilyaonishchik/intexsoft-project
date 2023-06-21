@@ -39,6 +39,7 @@ export class ProductController {
       categoryName,
       minPrice,
       maxPrice,
+      query,
       ...rest
     }: {
       take: number;
@@ -48,9 +49,10 @@ export class ProductController {
       categoryName: string;
       minPrice: number;
       maxPrice: number;
+      query: string;
     },
   ): Promise<[Product[], number]> {
-    return this.productService.findAll(skip, take, sortBy, order, categoryName, minPrice, maxPrice, rest);
+    return this.productService.findAll(skip, take, sortBy, order, categoryName, minPrice, maxPrice, query, rest);
   }
 
   @Get(':id')

@@ -15,6 +15,7 @@ import {
   Product,
   Products,
   Profile,
+  Search,
   Settings,
   Test,
 } from './components';
@@ -29,6 +30,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='catalog/:categoryName' element={<Catalog />} />
         <Route path='products/:id' element={<Product />} />
+        <Route path='search' element={<Search />} />
         <Route path='settings' element={<Settings />} />
         {me && (
           <>

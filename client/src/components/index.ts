@@ -12,6 +12,7 @@ import Order from './order/Order';
 import Orders from './orders/Orders';
 import Product from './product/Product';
 import Profile from './profile/Profile';
+import Search from './search/Search';
 import Settings from './settings/Settings';
 
 export {
@@ -30,4 +31,5 @@ export {
   Product,
   Settings,
   Test,
+  Search,
 };

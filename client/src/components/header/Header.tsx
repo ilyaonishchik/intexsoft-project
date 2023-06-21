@@ -1,5 +1,5 @@
 import { Container, Group } from '@mantine/core';
-import Search from './Search';
+import Search from './search/Search';
 import Nav from './nav/Nav';
 import Logo from './Logo';
 import Catalog from './catalog/Catalog';

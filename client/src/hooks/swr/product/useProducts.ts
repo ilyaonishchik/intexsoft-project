@@ -19,6 +19,7 @@ type Args = {
   categoryName?: string;
   price?: PriceArgs;
   filters?: object;
+  query?: string;
 };
 
 export const useProducts = (args?: Args) => {
