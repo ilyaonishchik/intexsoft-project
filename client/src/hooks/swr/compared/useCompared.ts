@@ -11,4 +11,7 @@ const fetcher = async (url: string) => {
 };
 
 export const useCompared = () =>
-  useSWR<Compared, Error>(`${import.meta.env.VITE_SERVER_URL}/compared`, fetcher, { revalidateOnFocus: false });
+  useSWR<Compared, Error>(`${import.meta.env.VITE_SERVER_URL}/compared`, fetcher, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });

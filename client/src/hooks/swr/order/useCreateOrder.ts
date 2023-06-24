@@ -1,5 +1,6 @@
 import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
+import { NestError } from '../../../types';
 
 type Arg = {
   name: string;
@@ -16,7 +17,10 @@ const fetcher = async (url: string, { arg }: { arg: Arg }) => {
     },
     body: JSON.stringify(arg),
   });
-  if (!response.ok) throw new Error('Error occured while creating the cart item');
+  if (!response.ok) {
+    const { message } = (await response.json()) as NestError;
+    throw new Error(message);
+  }
   const confirmationUrl = await response.text();
   return confirmationUrl;
 };

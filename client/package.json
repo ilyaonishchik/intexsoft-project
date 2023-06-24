@@ -13,10 +13,12 @@
   "dependencies": {
     "@a2seven/yoo-checkout": "^1.1.4",
     "@reduxjs/toolkit": "^1.9.5",
+    "chart.js": "^4.3.0",
     "i18next": "^22.5.0",
     "i18next-browser-languagedetector": "^7.0.2",
     "i18next-http-backend": "^2.2.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
     "react-redux": "^8.0.7",

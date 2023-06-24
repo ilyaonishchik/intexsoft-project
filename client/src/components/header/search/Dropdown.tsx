@@ -30,14 +30,16 @@ export default function Dropdown({ query }: Props) {
         {products.map(({ id, name, images }) => (
           <Paper key={id} component={Link} to={`/products/${id}`}>
             <Group>
-              <Image
-                src={`${import.meta.env.VITE_SERVER_URL}/${
-                  images!.sort((a, b) => a.ordinal - b.ordinal)[0].image.name
-                }`}
-                height={50}
-                width={50}
-                fit='contain'
-              />
+              {!!images?.length && (
+                <Image
+                  src={`${import.meta.env.VITE_SERVER_URL}/${
+                    images.sort((a, b) => a.ordinal - b.ordinal)[0].image.name
+                  }`}
+                  height={50}
+                  width={50}
+                  fit='contain'
+                />
+              )}
               <Text>{name}</Text>
             </Group>
           </Paper>

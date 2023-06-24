@@ -87,7 +87,7 @@ export default function Nav() {
             <ComparedLink />
             <NavLink label={t('orders')} icon={<IconReceipt2 stroke='1' />} component={Link} to='/orders' />
             <NavLink label={t('profile')} icon={<IconUserCircle stroke='1' />} component={Link} to='/profile' />
-            <NavLink label={t('notifications')} icon={<IconBell stroke='1' />} component={Link} to='/notifications' />
+            {/* <NavLink label={t('notifications')} icon={<IconBell stroke='1' />} component={Link} to='/notifications' /> */}
             <NavLink label={t('settings')} icon={<IconSettings stroke='1' />} component={Link} to='/settings' />
             <Menu.Divider />
             <Menu.Item icon={<IconLogout stroke='1' />} onClick={handleSignOut} color='red'>

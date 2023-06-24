@@ -8,4 +8,8 @@ const fetcher = async (url: string) => {
   return me;
 };
 
-export const useMe = () => useSWR<User, Error>(`${import.meta.env.VITE_SERVER_URL}/auth/me`, fetcher);
+export const useMe = () =>
+  useSWR<User, Error>(`${import.meta.env.VITE_SERVER_URL}/auth/me`, fetcher, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });

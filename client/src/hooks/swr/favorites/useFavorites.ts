@@ -11,4 +11,7 @@ const fetcher = async (url: string) => {
 };
 
 export const useFavorites = () =>
-  useSWR<Favorites, Error>(`${import.meta.env.VITE_SERVER_URL}/favorites`, fetcher, { revalidateOnFocus: false });
+  useSWR<Favorites, Error>(`${import.meta.env.VITE_SERVER_URL}/favorites`, fetcher, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });

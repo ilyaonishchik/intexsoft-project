@@ -11,4 +11,7 @@ const fetcher = async (url: string) => {
 };
 
 export const useCart = () =>
-  useSWR<Cart, Error>(`${import.meta.env.VITE_SERVER_URL}/cart`, fetcher, { revalidateOnFocus: false });
+  useSWR<Cart, Error>(`${import.meta.env.VITE_SERVER_URL}/cart`, fetcher, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });

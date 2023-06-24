@@ -16,7 +16,7 @@ export default function FavoritesButton({ productId, iconSize, ...props }: Props
   if (isLoading) return <Loading />;
   if (error)
     return (
-      <ActionIcon {...props} component={Link} to='/auth' color='cyan'>
+      <ActionIcon {...props} component={Link} to='/auth' color='red'>
         <IconHeart stroke={1} size={iconSize} />
       </ActionIcon>
     );
